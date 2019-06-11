@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HistoryWindow</string>
+    <string name="open_camera1">Задняя камера</string>
+    <string name="open_camera2">Передняя камера</string>
+</resources>
