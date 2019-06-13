@@ -28,7 +28,7 @@ public class Location {
     private Boolean forStreetview;
     @SerializedName("streetview")
     @Expose
-    private Streetview streetview;
+    private ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview streetview;
 
     public Double getLat() {
         return lat;
@@ -86,11 +86,12 @@ public class Location {
         this.forStreetview = forStreetview;
     }
 
-    public Streetview getStreetview() {
+    public ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview getStreetview() {
         return streetview;
     }
 
-    public void setStreetview(Streetview streetview) {
+    public void setStreetview(
+            ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview streetview) {
         this.streetview = streetview;
     }
 

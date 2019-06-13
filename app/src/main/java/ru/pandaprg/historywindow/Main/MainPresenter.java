@@ -8,6 +8,7 @@ import java.util.Date;
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
 import ru.pandaprg.historywindow.Hardware.GPS.MainGPS;
 import ru.pandaprg.historywindow.Model.Model;
+import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 
 public class MainPresenter extends BasePresenter {
 
@@ -20,23 +21,31 @@ public class MainPresenter extends BasePresenter {
 
     private MainGPS gps;
 
+    private MainHistoryPin historyPin;
+
     public MainPresenter (Context ctx){
         this.ctx = ctx;
 
         model = Model.getInstanse(ctx);
 
-        // --------------- Для GPS ---------------------------------
-
-
+        // --------------- Для GPS --------------------------------
         gps = new MainGPS(ctx, this);
         gps.onResume();
 
+        //------------------- Для WEB HistoryPin-------------------
+        // myLat = 46.3757;
+        //            myLng = 48.0485;
 
-        //-----------------------------------------------------
 
     }
 
     public void onGPSLocation(double lat, double lng, Date time){
+
+        model.setMyLocation(lat, lng, time);
+
+        //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
+        historyPin = new MainHistoryPin(this, model.getParameters());
+
         if (isAttached()) {
             String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
             ((MainActivity)view).showGPSLocation(mess);
@@ -49,6 +58,17 @@ public class MainPresenter extends BasePresenter {
     public void onChangeAlphaBar (int alpha){
         Log.i (TAG,"onChangeAlphaBar = " + alpha);
         ((MainActivity)view).setPictureAplpha(alpha);
+    }
+
+    public void onHistoryPinPictureFind(String imageURL){
+        ((MainActivity)view).showMessage("Picture found");
+        ((MainActivity)view).showPicture(imageURL);
+
+    }
+
+    public void onHistoryPinPictureNotFind(){
+        ((MainActivity)view).showMessage("Picture not found");
+        ((MainActivity)view).hidePicture();
     }
 
 }

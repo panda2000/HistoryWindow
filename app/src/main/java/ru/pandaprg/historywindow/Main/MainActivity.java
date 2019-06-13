@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,6 @@ import ru.pandaprg.historywindow.Base.View.BaseActivity;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
 import ru.pandaprg.historywindow.R;
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 
 public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
 
@@ -39,7 +39,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     // Поля Камеры
     private MyCameraContract cam;
-    private TextureView imageView = null;
+    private TextureView videoView = null;
+    private TextView tvMess = null;
 
     private Button mButtonChangeCamera = null;
     private Button mButtonOpenCamera2 = null;
@@ -55,7 +56,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
         mButtonOpenCamera2 = (Button) findViewById(R.id.btn_open_camera2);
 
-        imageView = (TextureView) findViewById(R.id.image_view);
+        videoView = (TextureView) findViewById(R.id.video_view);
 
         alphaBar = (SeekBar) findViewById(R.id.alphaBar);
         alphaBar.setProgress(128);
@@ -69,12 +70,13 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     //-------------- GPS -------------------------------------
         textView = (TextView) findViewById(R.id.textGPS);
+        tvMess = (TextView) findViewById(R.id.tvMess);
 
     //---------- Для камеры -------------------------------
 
 
         cam = new MyCamera(this);
-        cam.setTextureView(imageView);
+        cam.setTextureView(videoView);
 
         mButtonChangeCamera.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -91,11 +93,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     //--------------------------------------------------------
 
 
-       //------------------- Для WEB HistoryPin-------------------
-        //TODO : перенести в презентер
-        MainHistoryPin HystoryPinRepository = new MainHistoryPin();
 
-        MainHistoryPin historyPin = new MainHistoryPin();
         //-----------------------------------------------------
 
         //-------------------------------------------------------------------------
@@ -103,8 +101,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         //------------ Picasso ------------------------------------------------
         picture_view=findViewById(R.id.picture_view);
         setPictureAplpha (128);
-        String imageURL = "https://photos-cdn.historypin.org/services/thumb/phid/297489/dim/320x300/quality/50/crop/1/c/1482269432";
-        Picasso.get().load(imageURL).into(picture_view);
+        //String imageURL = "https://photos-cdn.historypin.org/services/thumb/phid/297489/dim/320x300/quality/50/crop/1/c/1482269432";
+
     }
 
 
@@ -117,6 +115,18 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         textView.setText(mess);
     }
 
+    public void showMessage (String mess) {tvMess.setText(mess);}
+
+    public void showPicture (String imageURL){
+        Log.i ("Picasso","Show " + imageURL);
+        Picasso.get().load(imageURL).into(picture_view);
+        picture_view.setVisibility(View.VISIBLE);
+    }
+
+    public void hidePicture (){
+        Log.i ("Picasso","Picture hide ");
+        picture_view.setVisibility(View.GONE);
+    }
 
     //region Marshmellows permissions
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -189,6 +199,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     private void startBackgroundServiceForLocationUpdate() {
 
     }
+
+    //--------------------- SeekBar interface --------------------------------
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

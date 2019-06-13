@@ -23,4 +23,7 @@ public interface JSONHistoryPinAPI {
     @GET ("/en/api/pin/get_gallery.json")  //?bounds={lat_lo},{lng_lo},{lat_hi},{lng_hi}&sort={sort}&paging={paging}
     public Call<POJOUserGallery> getUserGallery (@Query("user") String user);
 
+    @GET ("/en/api/pin/get_gallery.json")  //?bounds={lat_lo},{lng_lo},{lat_hi},{lng_hi}&sort={sort}&paging={paging}
+    public Call<POJOUserGallery> getUserGallery (@Query("user") String user, @Query("bounds") String bounds);
+
 }

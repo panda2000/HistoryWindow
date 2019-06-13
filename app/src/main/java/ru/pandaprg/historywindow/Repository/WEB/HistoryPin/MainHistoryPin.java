@@ -6,29 +6,39 @@ import android.util.Log;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.pandaprg.historywindow.Main.MainPresenter;
+import ru.pandaprg.historywindow.Model.RequestParameters;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.POJOUserGallery;
 
 public class MainHistoryPin {
 
-        public MainHistoryPin () {
+        MainPresenter presenter;
+
+
+        private String user;
+
+        public MainHistoryPin (final MainPresenter presenter, RequestParameters parameters) {
 
             String TAG = "testRetrofit";
 
+            this.presenter = presenter;
 
-            double lat_lo = 39.179422;
-            double lng_lo = 19.928202;
-            double lat_hi = 45.987757;
-            double lng_hi = 26.618876;
+           // My Test Photo
+            user = parameters.getUser();
+
+
+            double lat_lo = parameters.getBounds().getLat_lo();
+            double lng_lo = parameters.getBounds().getLng_lo();
+            double lat_hi = parameters.getBounds().getLat_hi();
+            double lng_hi = parameters.getBounds().getLng_hi();
+            
             String bounds = "" + lat_lo + "," + lng_lo +","+lat_hi+","+lng_hi;
-            String sort = "popular";
-            int paging = 1;
 
-            String user = ""+62116;
 
 
             NetworkService.getInstance("https://www.historypin.org")
                     .getHistoryPinAPI()
-                    .getUserGallery(user)
+                    .getUserGallery(user, bounds)
                     .enqueue(new Callback<POJOUserGallery>() {
 
                                  @Override
@@ -45,14 +55,31 @@ public class MainHistoryPin {
                                      POJOUserGallery gallery = response.body();
 
 
-                                     if (gallery != null) {
-                                         // textView.append(response.body().toString());
-                                         Log.d(TAG, gallery.getLimit() + "\n");
-                                         Log.d(TAG, gallery.getCount() + "\n");
-                                         Log.d(TAG, gallery.getPage() + "\n");
+                                     if (gallery != null ) {
+                                         if (Integer.parseInt(String.valueOf(gallery.getCount())) > 0) {
+                                             // textView.append(response.body().toString());
+                                             String imageURL;
+                                             int resultID = 0;
+
+                                             if (gallery.getResults().get(resultID).getImage() != null) {
+                                                 imageURL = gallery.getResults().get(resultID).getImage().toString();
+                                                 presenter.onHistoryPinPictureFind(imageURL);
+                                             }
+                                             else
+                                                 imageURL = gallery.getResults().get(resultID).getImages().get(0).getUrl().toString();
+
+                                             Log.d(TAG, imageURL + "\n");
+                                             Log.d(TAG, gallery.getResults().get(resultID).getCaption() + "\n");
+                                             Log.d(TAG, gallery.getResults().get(resultID).getDesc() + "\n");
+
+
+                                         }
+                                         else
+                                            presenter.onHistoryPinPictureNotFind();
 
                                      } else {
                                          Log.d(TAG, "NO Data");
+                                         presenter.onHistoryPinPictureNotFind();
                                      }
                                  }
 
