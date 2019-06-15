@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.Date;
 
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
+import ru.pandaprg.historywindow.Hardware.Accelerometr.MainAccelerometer;
 import ru.pandaprg.historywindow.Hardware.GPS.MainGPS;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
@@ -20,6 +21,7 @@ public class MainPresenter extends BasePresenter {
     Context ctx;
 
     private MainGPS gps;
+    private MainAccelerometer accel;
 
     private MainHistoryPin historyPin;
 
@@ -31,6 +33,9 @@ public class MainPresenter extends BasePresenter {
         // --------------- Для GPS --------------------------------
         gps = new MainGPS(ctx, this);
         gps.onResume();
+
+        accel = new MainAccelerometer(ctx, this);
+        accel.onResume();
 
         //------------------- Для WEB HistoryPin-------------------
         // myLat = 46.3757;
@@ -53,6 +58,11 @@ public class MainPresenter extends BasePresenter {
         } else {
             Log.e (TAG,"view is null");
         }
+    }
+
+    public void onAccelerometerChange (long xy, long xz, long yz){
+        model.setMyAccelerometr(xy, xz, yz);
+        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
 
     public void onChangeAlphaBar (int alpha){

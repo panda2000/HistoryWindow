@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/picture_view"
-            android:layout_marginTop="-145dp"
+            android:layout_marginTop="-166dp"
             android:max="255" />
 
         <TextView
@@ -57,6 +57,14 @@
 
             android:layout_marginTop="17dp"
             android:text="lat=46.3757   lng=48.0485" />
+
+        <TextView
+            android:id="@+id/tvAccel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textGPS"
+            android:layout_marginTop="-40dp"
+            android:text="TextView" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -82,6 +90,7 @@
                 android:text="Карта" />
 
         </LinearLayout>
+
 
     </RelativeLayout>
 

@@ -34,6 +34,8 @@ public class Model {
         parameters = new RequestParameters(lat,lng);
     }
 
+    public void setMyAccelerometr (long xy, long xz, long yz){}
+
     public double getMyLocationLat (){return myLocationLat;}
 
     public double getMyLocationLng() {return myLocationLng;}

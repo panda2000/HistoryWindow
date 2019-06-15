@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
     private TextView textView;
+    private TextView textAccel;
     private ImageView picture_view;
     private SeekBar alphaBar;
 
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     //-------------- GPS -------------------------------------
         textView = (TextView) findViewById(R.id.textGPS);
         tvMess = (TextView) findViewById(R.id.tvMess);
+        textAccel = (TextView) findViewById(R.id.tvAccel);
 
     //---------- Для камеры -------------------------------
 
@@ -113,6 +115,10 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     public void showGPSLocation (String mess){
         textView.setText(mess);
+    }
+
+    public void showAccelerometerData (String xy, String xz, String yz){
+        textAccel.setText(xy+ "  "+xz + "  "+yz);
     }
 
     public void showMessage (String mess) {tvMess.setText(mess);}
