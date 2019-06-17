@@ -31,7 +31,7 @@ public class MainHistoryPin {
             double lng_lo = parameters.getBounds().getLng_lo();
             double lat_hi = parameters.getBounds().getLat_hi();
             double lng_hi = parameters.getBounds().getLng_hi();
-            
+
             String bounds = "" + lat_lo + "," + lng_lo +","+lat_hi+","+lng_hi;
 
 
@@ -63,7 +63,7 @@ public class MainHistoryPin {
 
                                              if (gallery.getResults().get(resultID).getImage() != null) {
                                                  imageURL = gallery.getResults().get(resultID).getImage().toString();
-                                                 presenter.onHistoryPinPictureFind(imageURL);
+                                                 presenter.onHistoryPinPictureFind(imageURL, gallery);
                                              }
                                              else
                                                  imageURL = gallery.getResults().get(resultID).getImages().get(0).getUrl().toString();

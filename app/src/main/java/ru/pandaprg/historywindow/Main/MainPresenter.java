@@ -8,8 +8,10 @@ import java.util.Date;
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
 import ru.pandaprg.historywindow.Hardware.Accelerometr.MainAccelerometer;
 import ru.pandaprg.historywindow.Hardware.GPS.MainGPS;
+import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
+import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.POJOUserGallery;
 
 public class MainPresenter extends BasePresenter {
 
@@ -70,15 +72,24 @@ public class MainPresenter extends BasePresenter {
         ((MainActivity)view).setPictureAplpha(alpha);
     }
 
-    public void onHistoryPinPictureFind(String imageURL){
+    public void onHistoryPinPictureFind(String imageURL, POJOUserGallery gallery){
         ((MainActivity)view).showMessage("Picture found");
+        //TODO create gallery
+        ImagesData[] imagesData = convertHystoryPin2Model(gallery);
+        model.findPictures(imagesData);
         ((MainActivity)view).showPicture(imageURL);
 
+    }
+
+    private ImagesData[] convertHystoryPin2Model (POJOUserGallery gallery) {
+        //TODO create convert gallery
+        return new ImagesData[0];
     }
 
     public void onHistoryPinPictureNotFind(){
         ((MainActivity)view).showMessage("Picture not found");
         ((MainActivity)view).hidePicture();
     }
+
 
 }

@@ -15,6 +15,8 @@ public class Model {
 
     RequestParameters parameters;
 
+    ImagesData [] imagesArray;
+
     private Model (Context ctx) {
         this.ctx = ctx;
     }
@@ -42,5 +44,10 @@ public class Model {
 
     public RequestParameters getParameters() {
         return parameters;
+    }
+
+    public void findPictures (ImagesData [] gallery){
+
+        imagesArray = gallery;
     }
 }
