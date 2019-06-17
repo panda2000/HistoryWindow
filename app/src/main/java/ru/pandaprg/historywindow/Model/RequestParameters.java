@@ -3,7 +3,7 @@ package ru.pandaprg.historywindow.Model;
 public class RequestParameters {
     private String user = "" + 101705;
     private Bounds bounds;
-    private double delta = 0.0001;
+    private double delta = 0.001;
 
     private double myLat;
     private double myLng;

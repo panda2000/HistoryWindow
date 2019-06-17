@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
 import ru.pandaprg.historywindow.Hardware.Accelerometr.MainAccelerometer;
@@ -12,6 +14,7 @@ import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.POJOUserGallery;
+import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Result;
 
 public class MainPresenter extends BasePresenter {
 
@@ -20,7 +23,7 @@ public class MainPresenter extends BasePresenter {
     //private MainActivity view;
     private Model model;
 
-    Context ctx;
+    private Context ctx;
 
     private MainGPS gps;
     private MainAccelerometer accel;
@@ -30,7 +33,7 @@ public class MainPresenter extends BasePresenter {
     public MainPresenter (Context ctx){
         this.ctx = ctx;
 
-        model = Model.getInstanse(ctx);
+        model = Model.getInstanse(ctx, this);
 
         // --------------- Для GPS --------------------------------
         gps = new MainGPS(ctx, this);
@@ -72,18 +75,80 @@ public class MainPresenter extends BasePresenter {
         ((MainActivity)view).setPictureAplpha(alpha);
     }
 
-    public void onHistoryPinPictureFind(String imageURL, POJOUserGallery gallery){
-        ((MainActivity)view).showMessage("Picture found");
+    public void onHistoryPinPictureFind(POJOUserGallery gallery){
         //TODO create gallery
-        ImagesData[] imagesData = convertHystoryPin2Model(gallery);
+        List <ImagesData> imagesData = convertHystoryPin2Model(gallery);
         model.findPictures(imagesData);
-        ((MainActivity)view).showPicture(imageURL);
+
 
     }
 
-    private ImagesData[] convertHystoryPin2Model (POJOUserGallery gallery) {
+    public  void onPictureFind (String imageURL){
+        showImage(imageURL);
+    }
+
+    public void showImage (String imageURL){
+        ((MainActivity)view).showPicture(imageURL);
+    }
+
+    public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
+
+    private LinkedList <ImagesData> convertHystoryPin2Model (POJOUserGallery gallery) {
         //TODO create convert gallery
-        return new ImagesData[0];
+
+        LinkedList <ImagesData> imagesData = new LinkedList  <ImagesData> ();
+        ImagesData iData = null;
+
+        if (gallery != null ) {
+
+            if (Integer.parseInt(String.valueOf(gallery.getCount())) > 0) {
+                ((MainActivity)view).showMessage("Picture found");
+
+                List<Result> results = gallery.getResults();
+
+                double myLat = model.getMyLocationLat();
+                double myLng = model.getMyLocationLng();
+
+                for (Result res: results) {
+                    Log.d(TAG, res.getImage());
+                    Log.d(TAG, res.getDate());
+                    Log.d(TAG, res.getLocation().getLat().toString());
+                    Log.d(TAG, myLat+"");
+                    Log.d(TAG, myLng+"");
+
+                    iData = new ImagesData(res.getImage(),
+                            res.getDate(),
+                            res.getLocation(),
+                            myLat,
+                            myLng);
+
+                    imagesData.add(iData);
+
+                }
+/*
+                if (results.get(resultID).getImage() != null) {
+                    imageURL = gallery.getResults().get(resultID).getImage().toString();
+
+                }
+                else
+                    imageURL = results.get(resultID).getImages().get(0).getUrl().toString();
+*/
+/*
+                Log.d(TAG, imageURL + "\n");
+                Log.d(TAG, gallery.getResults().get(resultID).getCaption() + "\n");
+                Log.d(TAG, gallery.getResults().get(resultID).getDesc() + "\n");
+*/
+
+            }
+            else
+                onHistoryPinPictureNotFind();
+
+        } else {
+            Log.d(TAG, "NO Data");
+            onHistoryPinPictureNotFind();
+        }
+
+        return imagesData;
     }
 
     public void onHistoryPinPictureNotFind(){

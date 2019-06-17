@@ -2,6 +2,7 @@ package ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview;
 
 public class Location {
 
@@ -28,7 +29,7 @@ public class Location {
     private Boolean forStreetview;
     @SerializedName("streetview")
     @Expose
-    private ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview streetview;
+    private Streetview streetview;
 
     public Double getLat() {
         return lat;
@@ -86,12 +87,12 @@ public class Location {
         this.forStreetview = forStreetview;
     }
 
-    public ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview getStreetview() {
+    public Streetview getStreetview() {
         return streetview;
     }
 
     public void setStreetview(
-            ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Streetview streetview) {
+            Streetview streetview) {
         this.streetview = streetview;
     }
 

@@ -54,33 +54,8 @@ public class MainHistoryPin {
 
                                      POJOUserGallery gallery = response.body();
 
+                                     presenter.onHistoryPinPictureFind(gallery);
 
-                                     if (gallery != null ) {
-                                         if (Integer.parseInt(String.valueOf(gallery.getCount())) > 0) {
-                                             // textView.append(response.body().toString());
-                                             String imageURL;
-                                             int resultID = 0;
-
-                                             if (gallery.getResults().get(resultID).getImage() != null) {
-                                                 imageURL = gallery.getResults().get(resultID).getImage().toString();
-                                                 presenter.onHistoryPinPictureFind(imageURL, gallery);
-                                             }
-                                             else
-                                                 imageURL = gallery.getResults().get(resultID).getImages().get(0).getUrl().toString();
-
-                                             Log.d(TAG, imageURL + "\n");
-                                             Log.d(TAG, gallery.getResults().get(resultID).getCaption() + "\n");
-                                             Log.d(TAG, gallery.getResults().get(resultID).getDesc() + "\n");
-
-
-                                         }
-                                         else
-                                            presenter.onHistoryPinPictureNotFind();
-
-                                     } else {
-                                         Log.d(TAG, "NO Data");
-                                         presenter.onHistoryPinPictureNotFind();
-                                     }
                                  }
 
                                  @Override

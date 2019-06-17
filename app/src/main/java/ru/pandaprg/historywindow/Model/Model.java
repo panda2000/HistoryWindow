@@ -3,27 +3,32 @@ package ru.pandaprg.historywindow.Model;
 import android.content.Context;
 
 import java.util.Date;
+import java.util.List;
+
+import ru.pandaprg.historywindow.Main.MainPresenter;
 
 public class Model {
 
     private static Model model;
-    Context ctx;
+    private MainPresenter presenter;
+    private Context ctx;
 
     private double myLocationLat;
     private double myLocationLng;
     private Date myLocationTime;
 
-    RequestParameters parameters;
+    private RequestParameters parameters;
 
-    ImagesData [] imagesArray;
+    private List<ImagesData> imagesArray;
 
-    private Model (Context ctx) {
+    private Model (Context ctx, MainPresenter presenter) {
         this.ctx = ctx;
+        this.presenter = presenter;
     }
 
-    public static Model getInstanse (Context ctx){
+    public static Model getInstanse (Context ctx, MainPresenter presenter){
         if (model == null){
-            model = new Model (ctx);
+            model = new Model (ctx, presenter);
         }
         return model;
     }
@@ -46,8 +51,26 @@ public class Model {
         return parameters;
     }
 
-    public void findPictures (ImagesData [] gallery){
+    public void findPictures (List <ImagesData> gallery){
 
-        imagesArray = gallery;
+        if(gallery!= null) {
+
+            imagesArray = gallery;
+
+            String imageURL=null;
+            double distance = 0;
+
+            if (!gallery.isEmpty()) {
+                if (gallery.get(0).getImageURL() != null) {
+                    imageURL = gallery.get(0).getImageURL();
+                    distance = gallery.get(0).getDistance();
+                }
+            }
+
+            if (imageURL != null) {
+                presenter.showImage(imageURL);
+                presenter.showMessage("Дистанция "+ distance + "м.");
+            }
+        }
     }
 }

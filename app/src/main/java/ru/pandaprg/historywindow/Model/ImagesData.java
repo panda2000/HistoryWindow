@@ -1,6 +1,6 @@
 package ru.pandaprg.historywindow.Model;
 
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.Gallery.Location;
+import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Location;
 
 public class ImagesData {
     private String imageURL;
@@ -28,22 +28,23 @@ public class ImagesData {
     public double calcDistance(double myLat, double myLng){
         // TODO calc distance
 
-        double R = 63772795; // R Eath metres
-        /*
-         φ1 = lat1.toRadians();
-        var φ2 = lat2.toRadians();
-        var Δφ = (lat2-lat1).toRadians();
-        var Δλ = (lon2-lon1).toRadians();
-*/
-        double a = 0;
-/*
-        var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                Math.cos(φ1) * Math.cos(φ2) *
-                        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        final double R = 6372795; // R Eath metres
 
-*/
-        double c = 1;
-        // c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double imageLat = Math.toRadians(location.getLat());
+        double imageLng = Math.toRadians(location.getLng());
+
+        myLat = Math.toRadians(myLat);
+        myLng = Math.toRadians(myLng);
+
+        double deltaLat = (imageLat-myLat);
+        double deltaLng = (imageLng-myLng);
+
+        double a = Math.sin(deltaLat/2) * Math.sin(deltaLat/2) +
+                Math.cos(myLat) * Math.cos(imageLat) *
+                        Math.sin(deltaLng/2) * Math.sin(deltaLng/2);
+
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
         distance = R * c;
 
