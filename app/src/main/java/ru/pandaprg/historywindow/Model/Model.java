@@ -21,6 +21,12 @@ public class Model {
 
     private List<ImagesData> imagesArray;
 
+    String imageURL=null;
+    double distance=0;
+
+    private float currentDeg;
+    private float oldDeg;
+
     private Model (Context ctx, MainPresenter presenter) {
         this.ctx = ctx;
         this.presenter = presenter;
@@ -41,7 +47,15 @@ public class Model {
         parameters = new RequestParameters(lat,lng);
     }
 
-    public void setMyAccelerometr (long xy, long xz, long yz){}
+    public void setMyAccelerometr (long xy, long xz, long yz){
+
+        oldDeg = currentDeg;
+        currentDeg = xy * (-1);
+        if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
+            presenter.showArrow();
+            presenter.onRotation(oldDeg, currentDeg);
+        }
+    }
 
     public double getMyLocationLat (){return myLocationLat;}
 
@@ -57,8 +71,7 @@ public class Model {
 
             imagesArray = gallery;
 
-            String imageURL=null;
-            double distance = 0;
+            distance = 0;
 
             if (!gallery.isEmpty()) {
                 if (gallery.get(0).getImageURL() != null) {
@@ -67,10 +80,18 @@ public class Model {
                 }
             }
 
-            if (imageURL != null) {
-                presenter.showImage(imageURL);
+            if (imageURL != null ) {
+                if (distance < 10) {
+                    presenter.showImage(imageURL);
+                    presenter.onRotation(currentDeg, 0);
+                }
                 presenter.showMessage("Дистанция "+ distance + "м.");
+            } else {
+                presenter.showMessage("Изображение не обнаружено");
             }
+        } else {
+            imageURL = null;
+            presenter.showMessage("Изображение не обнаружено");
         }
     }
 }

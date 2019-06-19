@@ -70,6 +70,11 @@ public class MainPresenter extends BasePresenter {
         ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
 
+    public void onRotation (float oldDeg, float currentDeg){
+        Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
+        ((MainActivity)view).rotationPicture(oldDeg, currentDeg);
+    }
+
     public void onChangeAlphaBar (int alpha){
         Log.i (TAG,"onChangeAlphaBar = " + alpha);
         ((MainActivity)view).setPictureAplpha(alpha);
@@ -89,6 +94,9 @@ public class MainPresenter extends BasePresenter {
 
     public void showImage (String imageURL){
         ((MainActivity)view).showPicture(imageURL);
+    }
+    public void showArrow (){
+        ((MainActivity)view).showArrow();
     }
 
     public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
@@ -125,19 +133,7 @@ public class MainPresenter extends BasePresenter {
                     imagesData.add(iData);
 
                 }
-/*
-                if (results.get(resultID).getImage() != null) {
-                    imageURL = gallery.getResults().get(resultID).getImage().toString();
 
-                }
-                else
-                    imageURL = results.get(resultID).getImages().get(0).getUrl().toString();
-*/
-/*
-                Log.d(TAG, imageURL + "\n");
-                Log.d(TAG, gallery.getResults().get(resultID).getCaption() + "\n");
-                Log.d(TAG, gallery.getResults().get(resultID).getDesc() + "\n");
-*/
 
             }
             else

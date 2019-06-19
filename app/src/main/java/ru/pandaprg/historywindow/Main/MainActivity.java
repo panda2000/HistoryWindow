@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -129,9 +131,28 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         picture_view.setVisibility(View.VISIBLE);
     }
 
+    public void showArrow (){
+        picture_view.setImageResource(R.drawable.arrow);
+    }
+
     public void hidePicture (){
         Log.i ("Picasso","Picture hide ");
         picture_view.setVisibility(View.GONE);
+    }
+
+    public void rotationPicture (float olddeg, float deg) {
+       // picture_view.animate().rotation(deg);
+
+        Animation an = new RotateAnimation(olddeg, deg,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        //deg = azimuth;
+
+        an.setDuration(500);
+        an.setRepeatCount(0);
+        an.setFillAfter(true);
+
+        picture_view.startAnimation(an);
     }
 
     //region Marshmellows permissions
