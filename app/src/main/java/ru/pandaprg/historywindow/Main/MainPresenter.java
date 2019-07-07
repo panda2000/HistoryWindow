@@ -8,15 +8,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
-import ru.pandaprg.historywindow.Hardware.Accelerometr.MainAccelerometer;
 import ru.pandaprg.historywindow.Hardware.GPS.MainGPS;
 import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.POJOUserGallery;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Result;
+import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
+import ru.pandaprg.navigator.Hardware.Accelerometr.AccelerometrData;
+import ru.pandaprg.navigator.Hardware.Accelerometr.MainAccelerometer;
+import ru.pandaprg.navigator.Hardware.HardwareData;
 
-public class MainPresenter extends BasePresenter {
+public class MainPresenter extends BasePresenter implements AcceleromertContract {
 
     private final String TAG = "MainPresenter";
 
@@ -65,11 +68,37 @@ public class MainPresenter extends BasePresenter {
         }
     }
 
-    public void onAccelerometerChange (long xy, long xz, long yz){
+//----------------------- Accelerometr -----------------------------
+    @Override
+    public void onChange(AccelerometrData data) {
+        long xy = data.getXy();
+        long xz = data.getXz();
+        long yz = data.getYz();
+
+        //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
+
         model.setMyAccelerometr(xy, xz, yz);
+
         ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
 
+    @Override
+    public void onChange(HardwareData data) {
+        Log.i(TAG, "HardwareData");
+    }
+
+    @Override
+    public void Change(HardwareData data) {
+        Log.i(TAG, "HardwareData");
+    }
+
+    /*
+    public void onAccelerometerChange (){
+        model.setMyAccelerometr(xy, xz, yz);
+        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
+    }
+    */
+//--------------------------------------------------------------------
     public void onRotation (float oldDeg, float currentDeg){
         Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
         ((MainActivity)view).rotationPicture(oldDeg, currentDeg);

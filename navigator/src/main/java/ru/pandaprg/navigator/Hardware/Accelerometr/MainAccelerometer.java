@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Hardware.Accelerometr;
+package ru.pandaprg.navigator.Hardware.Accelerometr;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -6,10 +6,9 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import ru.pandaprg.historywindow.Main.MainPresenter;
-import ru.pandaprg.historywindow.Repository.RepositoryInterface;
+import ru.pandaprg.navigator.Hardware.HardwareContract;
 
-public class MainAccelerometer implements RepositoryInterface, SensorEventListener {
+public class MainAccelerometer implements SensorEventListener {
     private final String TAG = "MainAccelerometr";
 
     private Context ctx;
@@ -20,11 +19,12 @@ public class MainAccelerometer implements RepositoryInterface, SensorEventListen
     private float[] magnetData;       //Данные геомагнитного датчика
     private float[] OrientationData; //Матрица положения в пространстве
 
-    private MainPresenter presenter;
+    //private MainPresenter presenter;
+    private AcceleromertContract contract;
 
-    public MainAccelerometer(Context ctx, MainPresenter presenter) {
+    public MainAccelerometer(Context ctx, HardwareContract contract) {
         this.ctx = ctx;
-        this.presenter = presenter;
+        this.contract = (AcceleromertContract) contract;   // привязываем объект реализующий контракт
         sensorManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
 
         rotationMatrix = new float[16];
@@ -34,18 +34,18 @@ public class MainAccelerometer implements RepositoryInterface, SensorEventListen
     }
 
 
-    @Override
+    //@Override
     public void onCreate(Context ctx) {
 
     }
 
-    @Override
+    //@Override
     public void onResume() {
         sensorManager.registerListener( (SensorEventListener)this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI );
         sensorManager.registerListener( (SensorEventListener)this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_UI );
     }
 
-    @Override
+    //@Override
     public void onPause() {
         sensorManager.unregisterListener((SensorEventListener) this);
     }
@@ -66,11 +66,14 @@ public class MainAccelerometer implements RepositoryInterface, SensorEventListen
         SensorManager.getRotationMatrix(rotationMatrix, null, accelData, magnetData); //Получаем матрицу поворота
         SensorManager.getOrientation(rotationMatrix, OrientationData); //Получаем данные ориентации устройства в пространстве
 
-        presenter.onAccelerometerChange(
+        AccelerometrData data = new AccelerometrData(
                 Math.round(Math.toDegrees(OrientationData[0])),     //xy
                 Math.round(Math.toDegrees(OrientationData[1])),     //xz
-                Math.round(Math.toDegrees(OrientationData[2])));    //zy
+                Math.round(Math.toDegrees(OrientationData[2])));      //zy
 
+        //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
+
+        contract.onChange(data);
     }
 
     @Override
