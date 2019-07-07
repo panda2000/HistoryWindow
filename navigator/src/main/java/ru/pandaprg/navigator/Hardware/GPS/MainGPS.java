@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Hardware.GPS;
+package ru.pandaprg.navigator.Hardware.GPS;
 
 import android.Manifest;
 import android.content.Context;
@@ -14,30 +14,29 @@ import android.view.View;
 
 import java.util.Date;
 
-import ru.pandaprg.historywindow.Main.MainPresenter;
-import ru.pandaprg.historywindow.Repository.RepositoryInterface;
+import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
+import ru.pandaprg.navigator.Hardware.BaseHardware.HardwareInterface;
 
-public class MainGPS implements RepositoryInterface {
+public class MainGPS implements HardwareInterface {
 
     private final String TAG = "MainGPS";
 
     private LocationManager locationManager;
     private Context ctx;
 
-    private MainPresenter presenter;
+    //private MainPresenter presenter;
+    private AcceleromertContract contract;
 
-    public MainGPS(Context ctx, MainPresenter presenter) {
+    public MainGPS(Context ctx, AcceleromertContract contract) {
         this.ctx = ctx;
-        this.presenter = presenter;
+        this.contract = contract;
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    @Override
     public void onCreate(Context ctx) {
 
     }
 
-    @Override
     public void onResume() {
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -61,7 +60,6 @@ public class MainGPS implements RepositoryInterface {
                 locationListener);
     }
 
-    @Override
     public void onPause() {
         locationManager.removeUpdates(locationListener);
     }
@@ -107,7 +105,10 @@ public class MainGPS implements RepositoryInterface {
         } else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
            Log.d(TAG,formatLocation(location));
         }
-        presenter.onGPSLocation(location.getLatitude(), location.getLongitude(),new Date(location.getTime()));
+
+        GPSData data = new GPSData(location.getLatitude(), location.getLongitude(),new Date(location.getTime()));
+
+        contract.onChange(data);
     }
 
     private String formatLocation(Location location) {

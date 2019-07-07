@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
-import ru.pandaprg.historywindow.Hardware.GPS.MainGPS;
 import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
@@ -17,9 +16,12 @@ import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Resu
 import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
 import ru.pandaprg.navigator.Hardware.Accelerometr.AccelerometrData;
 import ru.pandaprg.navigator.Hardware.Accelerometr.MainAccelerometer;
+import ru.pandaprg.navigator.Hardware.GPS.GPSContract;
+import ru.pandaprg.navigator.Hardware.GPS.GPSData;
+import ru.pandaprg.navigator.Hardware.GPS.MainGPS;
 import ru.pandaprg.navigator.Hardware.HardwareData;
 
-public class MainPresenter extends BasePresenter implements AcceleromertContract {
+public class MainPresenter extends BasePresenter implements AcceleromertContract, GPSContract {
 
     private final String TAG = "MainPresenter";
 
@@ -52,6 +54,29 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
     }
 
+    //----------------------- GPS -----------------------------
+
+    @Override
+    public void onChange(GPSData data) {
+
+        double lat = data.getLat();
+        double lng = data.getLng();
+        Date time = data.getTime();
+
+        model.setMyLocation(lat, lng, time);
+
+        //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
+        historyPin = new MainHistoryPin(this, model.getParameters());
+
+        if (isAttached()) {
+            String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
+            ((MainActivity)view).showGPSLocation(mess);
+            Log.i (TAG,mess);
+        } else {
+            Log.e (TAG,"view is null");
+        }
+    }
+    /*
     public void onGPSLocation(double lat, double lng, Date time){
 
         model.setMyLocation(lat, lng, time);
@@ -67,7 +92,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
             Log.e (TAG,"view is null");
         }
     }
-
+*/
 //----------------------- Accelerometr -----------------------------
     @Override
     public void onChange(AccelerometrData data) {

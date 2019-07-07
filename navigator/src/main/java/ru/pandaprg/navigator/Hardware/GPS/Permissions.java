@@ -1,6 +1,7 @@
-package ru.pandaprg.historywindow.Hardware.GPS;
+package ru.pandaprg.navigator.Hardware.GPS;
 
-import ru.pandaprg.historywindow.Hardware.PermissionsContract;
+
+import ru.pandaprg.navigator.Hardware.PermissionsContract;
 
 public class Permissions implements PermissionsContract {
     @Override
