@@ -9,6 +9,8 @@ import ru.pandaprg.historywindow.Main.MainPresenter;
 
 public class Model {
 
+    // TODO refactor Model
+
     private static Model model;
     private MainPresenter presenter;
     private Context ctx;
@@ -23,6 +25,7 @@ public class Model {
 
     String imageURL=null;
     double distance=0;
+    double imageAzimut=0;
 
     private float currentDeg;
     private float oldDeg;
@@ -50,7 +53,8 @@ public class Model {
     public void setMyAccelerometr (long xy, long xz, long yz){
 
         oldDeg = currentDeg;
-        currentDeg = xy * (-1);
+        currentDeg = (float) (xy * (-1) + imageAzimut);
+
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
             presenter.showArrow();
             presenter.onRotation(oldDeg, currentDeg);
@@ -77,6 +81,7 @@ public class Model {
                 if (gallery.get(0).getImageURL() != null) {
                     imageURL = gallery.get(0).getImageURL();
                     distance = gallery.get(0).getDistance();
+                    imageAzimut = gallery.get(0).getAzimut();
                 }
             }
 
@@ -86,6 +91,7 @@ public class Model {
                     presenter.onRotation(currentDeg, 0);
                 }
                 presenter.showMessage("Дистанция "+ distance + "м.");
+                presenter.showArrow();
             } else {
                 presenter.showMessage("Изображение не обнаружено");
             }

@@ -81,7 +81,6 @@ public class MainPresenter extends BasePresenter {
     }
 
     public void onHistoryPinPictureFind(POJOUserGallery gallery){
-        //TODO create gallery
         List <ImagesData> imagesData = convertHystoryPin2Model(gallery);
         model.findPictures(imagesData);
 
@@ -102,7 +101,6 @@ public class MainPresenter extends BasePresenter {
     public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
 
     private LinkedList <ImagesData> convertHystoryPin2Model (POJOUserGallery gallery) {
-        //TODO create convert gallery
 
         LinkedList <ImagesData> imagesData = new LinkedList  <ImagesData> ();
         ImagesData iData = null;

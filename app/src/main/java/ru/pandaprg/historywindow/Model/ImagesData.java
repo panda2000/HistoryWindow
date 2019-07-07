@@ -7,12 +7,14 @@ public class ImagesData {
     private String imageDate;
     private Location location;
     private double distance;
+    private double azimut;
 
     public ImagesData (String imageURL, String imageDate, Location location,double myLat, double myLng) {
         this.imageDate = imageDate;
         this.imageURL = imageURL;
         this.location = location;
-        this.distance = calcDistance(myLat, myLng);
+        calcDistance(myLat, myLng);
+        calcAzimut(myLat, myLng);
     }
 
     public void setImageURL (String imageURL){this.imageURL = imageURL;}
@@ -26,7 +28,7 @@ public class ImagesData {
 
 
     public double calcDistance(double myLat, double myLng){
-        // TODO calc distance
+        // TODO refactor calc
 
         final double R = 6372795; // R Eath metres
 
@@ -53,5 +55,29 @@ public class ImagesData {
 
     public double getDistance (){
         return distance;
+    }
+
+    public double calcAzimut (double myLat, double myLng){
+        // TODO check calculate Azimut
+
+        double imageLat = Math.toRadians(location.getLat());
+        double imageLng = Math.toRadians(location.getLng());
+
+        myLat = Math.toRadians(myLat);
+        myLng = Math.toRadians(myLng);
+
+       double deltaLng = (imageLng-myLng);
+
+        double p = Math.sin(deltaLng)* Math.cos(imageLat);
+
+        double q = Math.cos(myLat)*Math.sin(imageLat) - Math.sin(myLat)*Math.cos(imageLat)*Math.cos(deltaLng);
+
+        azimut = Math.atan(p/q);
+
+        return  azimut;
+    }
+
+    public double getAzimut (){
+        return azimut;
     }
 }
