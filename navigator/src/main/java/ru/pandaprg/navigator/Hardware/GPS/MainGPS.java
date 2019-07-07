@@ -14,8 +14,8 @@ import android.view.View;
 
 import java.util.Date;
 
-import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
 import ru.pandaprg.navigator.Hardware.BaseHardware.HardwareInterface;
+import ru.pandaprg.navigator.Hardware.HardwareContract;
 
 public class MainGPS implements HardwareInterface {
 
@@ -25,11 +25,11 @@ public class MainGPS implements HardwareInterface {
     private Context ctx;
 
     //private MainPresenter presenter;
-    private AcceleromertContract contract;
+    private GPSContract contract;
 
-    public MainGPS(Context ctx, AcceleromertContract contract) {
+    public MainGPS(Context ctx, HardwareContract contract) {
         this.ctx = ctx;
-        this.contract = contract;
+        this.contract = (GPSContract) contract;
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
     }
 
