@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Base.View;
+package ru.pandaprg.baselibrary.View;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

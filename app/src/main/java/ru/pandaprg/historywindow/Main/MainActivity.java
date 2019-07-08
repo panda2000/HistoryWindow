@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ru.pandaprg.historywindow.Base.View.BaseActivity;
+import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
 import ru.pandaprg.historywindow.R;
@@ -123,16 +123,16 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         textAccel.setText(xy+ "  "+xz + "  "+yz);
     }
 
+    public void showArrow (){
+        picture_view.setImageResource(R.drawable.arrow);
+    }
+
     public void showMessage (String mess) {tvMess.setText(mess);}
 
     public void showPicture (String imageURL){
         Log.i ("Picasso","Show " + imageURL);
         Picasso.get().load(imageURL).into(picture_view);
         picture_view.setVisibility(View.VISIBLE);
-    }
-
-    public void showArrow (){
-        picture_view.setImageResource(R.drawable.arrow);
     }
 
     public void hidePicture (){
@@ -154,6 +154,9 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
         picture_view.startAnimation(an);
     }
+
+
+    // TODO : refactor move to Navigator Lib
 
     //region Marshmellows permissions
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;

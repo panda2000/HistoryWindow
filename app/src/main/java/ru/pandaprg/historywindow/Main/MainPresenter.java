@@ -7,7 +7,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import ru.pandaprg.historywindow.Base.Presenter.BasePresenter;
+import ru.pandaprg.baselibrary.Model.BaseModel;
+import ru.pandaprg.baselibrary.Presenter.BasePresenter;
 import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
@@ -26,7 +27,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     private final String TAG = "MainPresenter";
 
     //private MainActivity view;
-    private Model model;
+    private BaseModel model;
 
     private Context ctx;
 
@@ -38,7 +39,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     public MainPresenter (Context ctx){
         this.ctx = ctx;
 
-        model = Model.getInstanse(ctx, this);
+        model = Model.getInstanse(this);
 
         // --------------- Для GPS --------------------------------
         gps = new MainGPS(ctx, this);
@@ -63,10 +64,10 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         double lng = data.getLng();
         Date time = data.getTime();
 
-        model.setMyLocation(lat, lng, time);
+        ((Model)model).setMyLocation(lat, lng, time);
 
         //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
-        historyPin = new MainHistoryPin(this, model.getParameters());
+        historyPin = new MainHistoryPin(this, ((Model)model).getParameters());
 
         if (isAttached()) {
             String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
@@ -101,8 +102,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         long yz = data.getYz();
 
         //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
-
-        model.setMyAccelerometr(xy, xz, yz);
+    //TODO  ru.pandaprg.baselibrary.Model.BaseModel cannot be cast to ru.pandaprg.historywindow.Model.Model
+        ((Model)model).setMyAccelerometr(xy, xz, yz);
 
         ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
@@ -124,10 +125,17 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     }
     */
 //--------------------------------------------------------------------
+    // TODO : move to Navigator Lib
     public void onRotation (float oldDeg, float currentDeg){
         Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
         ((MainActivity)view).rotationPicture(oldDeg, currentDeg);
     }
+
+    public void showArrow (){
+        ((MainActivity)view).showArrow();
+    }
+
+//--------------------------------------------------------------------
 
     public void onChangeAlphaBar (int alpha){
         Log.i (TAG,"onChangeAlphaBar = " + alpha);
@@ -136,7 +144,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
     public void onHistoryPinPictureFind(POJOUserGallery gallery){
         List <ImagesData> imagesData = convertHystoryPin2Model(gallery);
-        model.findPictures(imagesData);
+        ((Model)model).findPictures(imagesData);
 
 
     }
@@ -147,9 +155,6 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
     public void showImage (String imageURL){
         ((MainActivity)view).showPicture(imageURL);
-    }
-    public void showArrow (){
-        ((MainActivity)view).showArrow();
     }
 
     public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
@@ -166,8 +171,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
                 List<Result> results = gallery.getResults();
 
-                double myLat = model.getMyLocationLat();
-                double myLng = model.getMyLocationLng();
+                double myLat = ((Model)model).getMyLocationLat();
+                double myLng = ((Model)model).getMyLocationLng();
 
                 for (Result res: results) {
                     Log.d(TAG, res.getImage());

@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Base.View;
+package ru.pandaprg.baselibrary.View;
 
 public interface BaseActivityInterface {
     //void onCreate (Bundle savedInstanceState);

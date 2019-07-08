@@ -1,19 +1,19 @@
 package ru.pandaprg.historywindow.Model;
 
-import android.content.Context;
-
 import java.util.Date;
 import java.util.List;
 
+import ru.pandaprg.baselibrary.Model.BaseModel;
 import ru.pandaprg.historywindow.Main.MainPresenter;
 
-public class Model {
+public class Model extends BaseModel {
 
-    // TODO refactor Model
+    // TODO refactor Model to BaseModel
 
-    private static Model model;
-    private MainPresenter presenter;
-    private Context ctx;
+ //   private static Model model;
+ //   private MainPresenter presenter;
+   // private Context ctx;
+
 
     private double myLocationLat;
     private double myLocationLng;
@@ -30,17 +30,10 @@ public class Model {
     private float currentDeg;
     private float oldDeg;
 
-    private Model (Context ctx, MainPresenter presenter) {
-        this.ctx = ctx;
-        this.presenter = presenter;
+    protected Model (MainPresenter presenter) {
+        super( presenter);
     }
 
-    public static Model getInstanse (Context ctx, MainPresenter presenter){
-        if (model == null){
-            model = new Model (ctx, presenter);
-        }
-        return model;
-    }
 
     public void setMyLocation(double lat, double lng, Date time){
         myLocationLat = lat;
@@ -56,8 +49,8 @@ public class Model {
         currentDeg = (float) (xy * (-1) + imageAzimut);
 
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
-            presenter.showArrow();
-            presenter.onRotation(oldDeg, currentDeg);
+            ((MainPresenter)presenter).showArrow();
+            ((MainPresenter)presenter).onRotation(oldDeg, currentDeg);
         }
     }
 
@@ -87,17 +80,17 @@ public class Model {
 
             if (imageURL != null ) {
                 if (distance < 10) {
-                    presenter.showImage(imageURL);
-                    presenter.onRotation(currentDeg, 0);
+                    ((MainPresenter)presenter).showImage(imageURL);
+                    ((MainPresenter)presenter).onRotation(currentDeg, 0);
                 }
-                presenter.showMessage("Дистанция "+ distance + "м.");
-                presenter.showArrow();
+                ((MainPresenter)presenter).showMessage("Дистанция "+ distance + "м.");
+                ((MainPresenter)presenter).showArrow();
             } else {
-                presenter.showMessage("Изображение не обнаружено");
+                ((MainPresenter)presenter).showMessage("Изображение не обнаружено");
             }
         } else {
             imageURL = null;
-            presenter.showMessage("Изображение не обнаружено");
+            ((MainPresenter)presenter).showMessage("Изображение не обнаружено");
         }
     }
 }

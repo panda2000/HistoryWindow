@@ -1,8 +1,8 @@
-package ru.pandaprg.historywindow.Base.Presenter;
+package ru.pandaprg.baselibrary.Presenter;
 
 import android.util.Log;
 
-import ru.pandaprg.historywindow.Base.View.BaseActivity;
+import ru.pandaprg.baselibrary.View.BaseActivity;
 
 public abstract class BasePresenter implements BasePresenterInterface {
     protected BaseActivity view = null;

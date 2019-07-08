@@ -1,6 +1,6 @@
-package ru.pandaprg.historywindow.Base.Presenter;
+package ru.pandaprg.baselibrary.Presenter;
 
-import ru.pandaprg.historywindow.Base.View.BaseActivity;
+import ru.pandaprg.baselibrary.View.BaseActivity;
 
 public interface BasePresenterInterface {
 
