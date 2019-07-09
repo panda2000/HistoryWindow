@@ -3,15 +3,14 @@ package ru.pandaprg.historywindow.Model;
 import java.util.Date;
 import java.util.List;
 
-import ru.pandaprg.baselibrary.Model.BaseModel;
 import ru.pandaprg.historywindow.Main.MainPresenter;
 
-public class Model extends BaseModel {
+public class Model {
 
     // TODO refactor Model to BaseModel
 
- //   private static Model model;
- //   private MainPresenter presenter;
+    private static Model model;
+    private MainPresenter presenter;
    // private Context ctx;
 
 
@@ -30,8 +29,16 @@ public class Model extends BaseModel {
     private float currentDeg;
     private float oldDeg;
 
-    protected Model (MainPresenter presenter) {
-        super( presenter);
+    private Model (MainPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    public static Model getInstanse (MainPresenter presenter){
+
+        if (model == null){
+            model = new Model (presenter);
+        }
+        return model;
     }
 
 
@@ -49,8 +56,8 @@ public class Model extends BaseModel {
         currentDeg = (float) (xy * (-1) + imageAzimut);
 
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
-            ((MainPresenter)presenter).showArrow();
-            ((MainPresenter)presenter).onRotation(oldDeg, currentDeg);
+            presenter.showArrow();
+            presenter.onRotation(oldDeg, currentDeg);
         }
     }
 
@@ -80,17 +87,17 @@ public class Model extends BaseModel {
 
             if (imageURL != null ) {
                 if (distance < 10) {
-                    ((MainPresenter)presenter).showImage(imageURL);
-                    ((MainPresenter)presenter).onRotation(currentDeg, 0);
+                    presenter.showImage(imageURL);
+                    presenter.onRotation(currentDeg, 0);
                 }
-                ((MainPresenter)presenter).showMessage("Дистанция "+ distance + "м.");
-                ((MainPresenter)presenter).showArrow();
+                presenter.showMessage("Дистанция "+ distance + "м.");
+                presenter.showArrow();
             } else {
-                ((MainPresenter)presenter).showMessage("Изображение не обнаружено");
+                presenter.showMessage("Изображение не обнаружено");
             }
         } else {
             imageURL = null;
-            ((MainPresenter)presenter).showMessage("Изображение не обнаружено");
+            presenter.showMessage("Изображение не обнаружено");
         }
     }
 }
