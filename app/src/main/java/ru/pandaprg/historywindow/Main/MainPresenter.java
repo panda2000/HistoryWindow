@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import ru.pandaprg.baselibrary.Model.BaseModel;
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
 import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
@@ -27,7 +26,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     private final String TAG = "MainPresenter";
 
     //private MainActivity view;
-    private BaseModel model;
+    private Model model;
 
     private Context ctx;
 
