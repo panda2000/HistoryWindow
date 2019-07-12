@@ -4,15 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
-import ru.pandaprg.historywindow.Model.ImagesData;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.POJOUserGallery;
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Result;
 import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
 import ru.pandaprg.navigator.Hardware.Accelerometr.AccelerometrData;
 import ru.pandaprg.navigator.Hardware.Accelerometr.MainAccelerometer;
@@ -136,7 +131,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     }
 */
 //--------------------------------------------------------------------
-
+/*
     public void onChangeAlphaBar (int alpha){
         Log.i (TAG,"onChangeAlphaBar = " + alpha);
         ((MainActivity)view).setPictureAplpha(alpha);
@@ -208,6 +203,6 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         ((MainActivity)view).showMessage("Picture not found");
         ((MainActivity)view).hidePicture();
     }
-
+*/
 
 }

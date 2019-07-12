@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +51,17 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         LayoutID = R.layout.activity_main;
         super.onCreate(savedInstanceState);
 
+
+        // ----Добавляем во фрагмент Стрелку из модуля навигатор--------
+        /*
+        setContentView(ru.pandaprg.navigator.R.layout.arrow_activity);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(ru.pandaprg.navigator.R.id.container, ArrowFragment.newInstance())
+                    .commitNow();
+        }*/
+        //--------------------------------------------------------------
+
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
         mButtonOpenCamera2 = (Button) findViewById(R.id.btn_open_camera2);
 
@@ -63,35 +71,39 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         alphaBar.setProgress(128);
         alphaBar.setOnSeekBarChangeListener(this);
 
-    // ------------ Presenter -----------------------------
+
+
+        // ------------ Presenter -----------------------------
         checkAndAddPermission();
 
         presenter = new MainPresenter(this);
         presenter.attach(this);
 
-    //-------------- GPS -------------------------------------
+        //-------------- GPS -------------------------------------
         textView = (TextView) findViewById(R.id.textGPS);
         tvMess = (TextView) findViewById(R.id.tvMess);
         textAccel = (TextView) findViewById(R.id.tvAccel);
 
-    //---------- Для камеры -------------------------------
+        //---------- Для камеры -------------------------------
 
 
         cam = new MyCamera(this);
         cam.setTextureView(videoView);
 
         mButtonChangeCamera.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 cam.choiceCamera(0);
             }
         });
 
         mButtonOpenCamera2.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 cam.choiceCamera(1);
             }
         });
-
+    }
     //--------------------------------------------------------
 
 
@@ -101,17 +113,33 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         //-------------------------------------------------------------------------
 
         //------------ Picasso ------------------------------------------------
-        picture_view=findViewById(R.id.picture_view);
+        /*
+        //TODO create Gallery module
+
+    picture_view=findViewById(R.id.picture_view);
         setPictureAplpha (128);
         //String imageURL = "https://photos-cdn.historypin.org/services/thumb/phid/297489/dim/320x300/quality/50/crop/1/c/1482269432";
 
     }
 
 
+    public void showPicture (String imageURL){
+        Log.i ("Picasso","Show " + imageURL);
+        Picasso.get().load(imageURL).into(picture_view);
+        picture_view.setVisibility(View.VISIBLE);
+    }
+
+    public void hidePicture (){
+        Log.i ("Picasso","Picture hide ");
+        picture_view.setVisibility(View.GONE);
+    }
+
+
 
     public void setPictureAplpha (int alpha){
         picture_view.setAlpha(alpha);
-    }
+    } */
+    //--------------------------------------------------------
 
     public void showGPSLocation (String mess){
         textView.setText(mess);
@@ -120,6 +148,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     public void showAccelerometerData (String xy, String xz, String yz){
         textAccel.setText(xy+ "  "+xz + "  "+yz);
     }
+
+
 
     /*
     //TODO move to Navigator
@@ -146,16 +176,6 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     public void showMessage (String mess) {tvMess.setText(mess);}
 
-    public void showPicture (String imageURL){
-        Log.i ("Picasso","Show " + imageURL);
-        Picasso.get().load(imageURL).into(picture_view);
-        picture_view.setVisibility(View.VISIBLE);
-    }
-
-    public void hidePicture (){
-        Log.i ("Picasso","Picture hide ");
-        picture_view.setVisibility(View.GONE);
-    }
 
 
     // TODO : refactor move to Navigator Lib
@@ -236,7 +256,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        presenter.onChangeAlphaBar(progress);
+       // presenter.onChangeAlphaBar(progress);
     }
 
     @Override
