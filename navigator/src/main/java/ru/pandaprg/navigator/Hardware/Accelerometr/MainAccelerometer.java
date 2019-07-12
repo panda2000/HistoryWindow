@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import ru.pandaprg.navigator.Hardware.HardwareContract;
 
 public class MainAccelerometer implements SensorEventListener {
+
     private final String TAG = "MainAccelerometr";
 
     private Context ctx;

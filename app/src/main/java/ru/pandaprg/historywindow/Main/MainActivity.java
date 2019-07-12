@@ -14,6 +14,7 @@ import ru.pandaprg.gallerylib.PictureFragment;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
 import ru.pandaprg.historywindow.R;
+import ru.pandaprg.navigator.Hardware.Permissions;
 import ru.pandaprg.navigator.Hardware.PermissionsContract;
 import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 
@@ -64,6 +65,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
         // ------------ Presenter -----------------------------
+        navigatorPermissions =  new Permissions();
         navigatorPermissions.CheckPermissions(this, MainActivity.this);
 
         presenter = new MainPresenter(this);

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,7 +19,10 @@ import java.util.Map;
 
 public class Permissions implements PermissionsContract, ActivityCompat.OnRequestPermissionsResultCallback {
 
+    private String TAG = "Navigator.Permissions";
+
     //region Marshmellows permissions
+    // TODO Test add permissions
 
     Activity activity;
     Context ctx;
@@ -47,6 +51,7 @@ public class Permissions implements PermissionsContract, ActivityCompat.OnReques
             if (permissionsNeeded.size() > 0) {
                 // Need Rationale
                 String message = "You need to grant access to " + permissionsNeeded.get(0);
+                Log.i(TAG, message);
                 for (int i = 1; i < permissionsNeeded.size(); i++)
                     message = message + ", " + permissionsNeeded.get(i);
 
