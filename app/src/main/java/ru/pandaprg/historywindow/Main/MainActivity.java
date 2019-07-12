@@ -121,7 +121,9 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         textAccel.setText(xy+ "  "+xz + "  "+yz);
     }
 
-    /*public void showArrow (){
+    /*
+    //TODO move to Navigator
+    public void showArrow (){
         picture_view.setImageResource(R.drawable.arrow);
     }
 

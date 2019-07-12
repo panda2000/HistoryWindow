@@ -125,15 +125,16 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     */
 //--------------------------------------------------------------------
     // TODO : move to Navigator Lib
+    /*
     public void onRotation (float oldDeg, float currentDeg){
         Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
-        ((MainActivity)view).rotationPicture(oldDeg, currentDeg);
+        ((MainActivity)view).rotationArrow(oldDeg, currentDeg);
     }
 
     public void showArrow (){
         ((MainActivity)view).showArrow();
     }
-
+*/
 //--------------------------------------------------------------------
 
     public void onChangeAlphaBar (int alpha){

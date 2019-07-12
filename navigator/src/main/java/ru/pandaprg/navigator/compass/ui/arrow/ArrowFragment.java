@@ -45,7 +45,7 @@ public class ArrowFragment extends Fragment {
         imageArrow.setImageResource(R.drawable.arrow);
     }
 
-    public void rotationPicture (float olddeg, float deg) {
+    public void rotationArrow (float olddeg, float deg) {
         // picture_view.animate().rotation(deg);
 
         Animation an = new RotateAnimation(olddeg, deg,
