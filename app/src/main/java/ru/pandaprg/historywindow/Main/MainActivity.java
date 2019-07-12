@@ -10,8 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -123,21 +121,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         textAccel.setText(xy+ "  "+xz + "  "+yz);
     }
 
-    public void showArrow (){
+    /*public void showArrow (){
         picture_view.setImageResource(R.drawable.arrow);
-    }
-
-    public void showMessage (String mess) {tvMess.setText(mess);}
-
-    public void showPicture (String imageURL){
-        Log.i ("Picasso","Show " + imageURL);
-        Picasso.get().load(imageURL).into(picture_view);
-        picture_view.setVisibility(View.VISIBLE);
-    }
-
-    public void hidePicture (){
-        Log.i ("Picasso","Picture hide ");
-        picture_view.setVisibility(View.GONE);
     }
 
     public void rotationPicture (float olddeg, float deg) {
@@ -153,6 +138,21 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         an.setFillAfter(true);
 
         picture_view.startAnimation(an);
+    }
+
+    */
+
+    public void showMessage (String mess) {tvMess.setText(mess);}
+
+    public void showPicture (String imageURL){
+        Log.i ("Picasso","Show " + imageURL);
+        Picasso.get().load(imageURL).into(picture_view);
+        picture_view.setVisibility(View.VISIBLE);
+    }
+
+    public void hidePicture (){
+        Log.i ("Picasso","Picture hide ");
+        picture_view.setVisibility(View.GONE);
     }
 
 
