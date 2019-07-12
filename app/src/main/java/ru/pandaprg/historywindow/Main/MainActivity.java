@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
         // ----Добавляем во фрагмент Стрелку из модуля навигатор--------
         /*
+        // TODO check this code and Architect !!!!!
         setContentView(ru.pandaprg.navigator.R.layout.arrow_activity);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
