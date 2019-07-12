@@ -1,35 +1,27 @@
 package ru.pandaprg.historywindow.Main;
 
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.gallerylib.PictureFragment;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
 import ru.pandaprg.historywindow.R;
+import ru.pandaprg.navigator.Hardware.PermissionsContract;
 import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 
 public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
 
     private MainPresenter presenter;
 
+    PermissionsContract navigatorPermissions;
 
     private TextView textView;
     private TextView textAccel;
@@ -72,7 +64,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
         // ------------ Presenter -----------------------------
-        checkAndAddPermission();
+        navigatorPermissions.CheckPermissions(this, MainActivity.this);
 
         presenter = new MainPresenter(this);
         presenter.attach(this);
@@ -141,7 +133,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
     // TODO : refactor move to Navigator Lib
-
+/*
     //region Marshmellows permissions
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private void checkAndAddPermission() {
@@ -213,7 +205,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     private void startBackgroundServiceForLocationUpdate() {
 
     }
-
+*/
     //--------------------- SeekBar interface --------------------------------
 
     @Override
