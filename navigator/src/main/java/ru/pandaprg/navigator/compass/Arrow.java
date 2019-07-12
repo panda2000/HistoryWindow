@@ -8,6 +8,7 @@ import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 
 public class Arrow extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,4 +19,5 @@ public class Arrow extends AppCompatActivity {
                     .commitNow();
         }
     }
+
 }

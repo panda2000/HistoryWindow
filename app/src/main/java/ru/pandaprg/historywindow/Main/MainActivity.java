@@ -10,7 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 import ru.pandaprg.baselibrary.View.BaseActivity;
+import ru.pandaprg.gallerylib.PictureFragment;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
 import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
 import ru.pandaprg.historywindow.R;
+import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 
 public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
 
@@ -32,7 +33,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     private TextView textView;
     private TextView textAccel;
-    private ImageView picture_view;
+   // private ImageView picture_view;
     private SeekBar alphaBar;
 
     // Поля Камеры
@@ -53,14 +54,10 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
         // ----Добавляем во фрагмент Стрелку из модуля навигатор--------
-        /*
+
         // TODO check this code and Architect !!!!!
-        setContentView(ru.pandaprg.navigator.R.layout.arrow_activity);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(ru.pandaprg.navigator.R.id.container, ArrowFragment.newInstance())
-                    .commitNow();
-        }*/
+        showArrow (savedInstanceState);
+
         //--------------------------------------------------------------
 
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
@@ -104,43 +101,13 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
                 cam.choiceCamera(1);
             }
         });
-    }
-    //--------------------------------------------------------
 
-
-
-        //-----------------------------------------------------
-
-        //-------------------------------------------------------------------------
 
         //------------ Picasso ------------------------------------------------
-        /*
-        //TODO create Gallery module
-
-    picture_view=findViewById(R.id.picture_view);
-        setPictureAplpha (128);
-        //String imageURL = "https://photos-cdn.historypin.org/services/thumb/phid/297489/dim/320x300/quality/50/crop/1/c/1482269432";
+        //Move to GalleryLib module
 
     }
 
-
-    public void showPicture (String imageURL){
-        Log.i ("Picasso","Show " + imageURL);
-        Picasso.get().load(imageURL).into(picture_view);
-        picture_view.setVisibility(View.VISIBLE);
-    }
-
-    public void hidePicture (){
-        Log.i ("Picasso","Picture hide ");
-        picture_view.setVisibility(View.GONE);
-    }
-
-
-
-    public void setPictureAplpha (int alpha){
-        picture_view.setAlpha(alpha);
-    } */
-    //--------------------------------------------------------
 
     public void showGPSLocation (String mess){
         textView.setText(mess);
@@ -151,29 +118,23 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     }
 
 
-
-    /*
-    //TODO move to Navigator
-    public void showArrow (){
-        picture_view.setImageResource(R.drawable.arrow);
+    //
+    public void showArrow (Bundle savedInstanceState){
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(ru.pandaprg.navigator.R.id.container, ArrowFragment.newInstance())
+                    .commitNow();
+        }
     }
 
-    public void rotationPicture (float olddeg, float deg) {
-       // picture_view.animate().rotation(deg);
-
-        Animation an = new RotateAnimation(olddeg, deg,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
-        //deg = azimuth;
-
-        an.setDuration(500);
-        an.setRepeatCount(0);
-        an.setFillAfter(true);
-
-        picture_view.startAnimation(an);
+    public void showPicture (Bundle savedInstanceState){
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(ru.pandaprg.navigator.R.id.container, PictureFragment.newInstance())
+                    .commitNow();
+        }
     }
 
-    */
 
     public void showMessage (String mess) {tvMess.setText(mess);}
 

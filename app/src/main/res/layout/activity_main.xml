@@ -34,6 +34,7 @@
             android:layout_height="match_parent"
             tools:context=".Arrow" />
 
+
         <SeekBar
             android:id="@+id/alphaBar"
             style="@android:style/Widget.DeviceDefault.Light.SeekBar"

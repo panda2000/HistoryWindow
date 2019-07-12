@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation project(path: ':navigator')
     implementation project(path: ':baselibrary')
+    implementation project(path: ':gallerylib')
 }

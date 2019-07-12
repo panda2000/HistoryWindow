@@ -1,1 +1,1 @@
-include ':app', ':navigator', ':baselibrary'
+include ':app', ':navigator', ':baselibrary', ':gallerylib'

@@ -20,6 +20,7 @@ public class ArrowFragment extends Fragment {
 
     private ImageView imageArrow;
 
+    private String TAG = "Navigator.ArrorFragment";
 
     public static ArrowFragment newInstance() {
         return new ArrowFragment();
