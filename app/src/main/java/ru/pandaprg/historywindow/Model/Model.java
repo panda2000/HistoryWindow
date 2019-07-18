@@ -56,8 +56,8 @@ public class Model {
         currentDeg = (float) (xy * (-1) + imageAzimut);
 
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
-         //   presenter.showArrow();
-          //  presenter.onRotation(oldDeg, currentDeg);
+            presenter.showArrow();
+            presenter.onRotation(oldDeg, currentDeg);
         }
     }
 
@@ -90,14 +90,14 @@ public class Model {
                    // presenter.showImage(imageURL);
                    // presenter.onRotation(currentDeg, 0);
                 }
-              //  presenter.showMessage("Дистанция "+ distance + "м.");
-              //  presenter.showArrow();
+                presenter.showMessage("Дистанция "+ distance + "м.");
+                presenter.showArrow();
             } else {
-               // presenter.showMessage("Изображение не обнаружено");
+                presenter.showMessage("Изображение не обнаружено");
             }
         } else {
             imageURL = null;
-           // presenter.showMessage("Изображение не обнаружено");
+            presenter.showMessage("Изображение не обнаружено");
         }
     }
 }

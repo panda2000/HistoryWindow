@@ -28,6 +28,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     private MainGPS gps;
     private MainAccelerometer accel;
 
+
     private MainHistoryPin historyPin;
 
     public MainPresenter (Context ctx){
@@ -42,7 +43,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         accel = new MainAccelerometer(ctx, this);
         accel.onResume();
 
-        //------------------- Для WEB HistoryPin-------------------
+         //------------------- Для WEB HistoryPin-------------------
         // myLat = 46.3757;
         //            myLng = 48.0485;
 
@@ -71,23 +72,7 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
             Log.e (TAG,"view is null");
         }
     }
-    /*
-    public void onGPSLocation(double lat, double lng, Date time){
 
-        model.setMyLocation(lat, lng, time);
-
-        //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
-        historyPin = new MainHistoryPin(this, model.getParameters());
-
-        if (isAttached()) {
-            String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
-            ((MainActivity)view).showGPSLocation(mess);
-            Log.i (TAG,mess);
-        } else {
-            Log.e (TAG,"view is null");
-        }
-    }
-*/
 //----------------------- Accelerometr -----------------------------
     @Override
     public void onChange(AccelerometrData data) {
@@ -112,24 +97,20 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         Log.i(TAG, "HardwareData");
     }
 
-    /*
-    public void onAccelerometerChange (){
-        model.setMyAccelerometr(xy, xz, yz);
-        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
-    }
-    */
+
 //--------------------------------------------------------------------
     // TODO : move to Navigator Lib
-    /*
+
     public void onRotation (float oldDeg, float currentDeg){
         Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
         ((MainActivity)view).rotationArrow(oldDeg, currentDeg);
+
     }
 
     public void showArrow (){
         ((MainActivity)view).showArrow();
     }
-*/
+
 //--------------------------------------------------------------------
 /*
     public void onChangeAlphaBar (int alpha){
@@ -152,9 +133,9 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
         ((MainActivity)view).showPicture(imageURL);
     }
 
-    public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
 
-    private LinkedList <ImagesData> convertHystoryPin2Model (POJOUserGallery gallery) {
+    // TODO move to galleryLib ?
+    private LinkedList<ImagesData> convertHystoryPin2Model (POJOUserGallery gallery) {
 
         LinkedList <ImagesData> imagesData = new LinkedList  <ImagesData> ();
         ImagesData iData = null;
@@ -198,11 +179,15 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
         return imagesData;
     }
+*/
+    public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
+
+
 
     public void onHistoryPinPictureNotFind(){
         ((MainActivity)view).showMessage("Picture not found");
         ((MainActivity)view).hidePicture();
     }
-*/
+
 
 }

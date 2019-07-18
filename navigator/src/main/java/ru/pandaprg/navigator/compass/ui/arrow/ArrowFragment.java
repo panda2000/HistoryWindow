@@ -42,9 +42,6 @@ public class ArrowFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
-    public void showArrow (){
-        imageArrow.setImageResource(R.drawable.arrow);
-    }
 
     public void rotationArrow (float olddeg, float deg) {
         // picture_view.animate().rotation(deg);
