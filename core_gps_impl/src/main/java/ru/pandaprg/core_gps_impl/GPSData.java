@@ -1,9 +1,10 @@
 package ru.pandaprg.core_gps_impl;
 
 import java.util.Date;
-import ru.pandaprg.navigator.Hardware.HardwareData;
 
-public class GPSData extends HardwareData {
+import ru.pandaprg.core_gps_api.GPSDataContract;
+
+public class GPSData extends GPSDataContract {
     private double lat;
     private double lng;
     private Date time;

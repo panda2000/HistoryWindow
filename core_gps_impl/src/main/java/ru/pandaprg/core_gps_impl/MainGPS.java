@@ -16,8 +16,7 @@ import java.util.Date;
 
 import ru.pandaprg.core_gps_api.GPSContract;
 
-
-public class MainGPS implements HardwareInterface {
+public class MainGPS { // implements GPSContract {
 
     private final String TAG = "MainGPS";
 
@@ -27,9 +26,9 @@ public class MainGPS implements HardwareInterface {
     //private MainPresenter presenter;
     private GPSContract contract;
 
-    public MainGPS(Context ctx, HardwareContract contract) {
+    public MainGPS(Context ctx, GPSContract contract) {
         this.ctx = ctx;
-        this.contract = (GPSContract) contract;
+        this.contract = contract;
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -108,7 +107,7 @@ public class MainGPS implements HardwareInterface {
 
         GPSData data = new GPSData(location.getLatitude(), location.getLongitude(),new Date(location.getTime()));
 
-        contract.onChange(data);
+        contract.onChange(data); //onChange(data);
     }
 
     private String formatLocation(Location location) {
