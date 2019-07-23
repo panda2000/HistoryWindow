@@ -6,17 +6,16 @@ import android.util.Log;
 import java.util.Date;
 
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
+import ru.pandaprg.core_accelerometr_impl.AccelerometrData;
+import ru.pandaprg.core_accelerometr_impl.MainAccelerometer;
+import ru.pandaprg.core_gps_impl.GPSData;
+import ru.pandaprg.core_gps_impl.MainGPS;
+import ru.pandaprg.core_hardware_api.HardwareContract;
+import ru.pandaprg.core_hardware_api.HardwareDataContract;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
-import ru.pandaprg.navigator.Hardware.Accelerometr.AcceleromertContract;
-import ru.pandaprg.navigator.Hardware.Accelerometr.AccelerometrData;
-import ru.pandaprg.navigator.Hardware.Accelerometr.MainAccelerometer;
-import ru.pandaprg.navigator.Hardware.GPS.GPSContract;
-import ru.pandaprg.navigator.Hardware.GPS.GPSData;
-import ru.pandaprg.navigator.Hardware.GPS.MainGPS;
-import ru.pandaprg.navigator.Hardware.HardwareData;
 
-public class MainPresenter extends BasePresenter implements AcceleromertContract, GPSContract {
+public class MainPresenter extends BasePresenter implements HardwareContract {
 
     private final String TAG = "MainPresenter";
 
@@ -25,8 +24,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
     private Context ctx;
 
-    private MainGPS gps;
-    private MainAccelerometer accel;
+    private HardwareContract gps;
+    private HardwareContract accel;
 
 
     private MainHistoryPin historyPin;
@@ -38,10 +37,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
         // --------------- Для GPS --------------------------------
         gps = new MainGPS(ctx, this);
-        gps.onResume();
 
         accel = new MainAccelerometer(ctx, this);
-        accel.onResume();
 
          //------------------- Для WEB HistoryPin-------------------
         // myLat = 46.3757;
@@ -52,7 +49,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
     //----------------------- GPS -----------------------------
 
-    @Override
+    //@Override
+    //TODO исправить баг с одной точкой входа всех данных
     public void onChange(GPSData data) {
 
         double lat = data.getLat();
@@ -74,7 +72,8 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
     }
 
 //----------------------- Accelerometr -----------------------------
-    @Override
+    //@Override
+//TODO исправить баг с одной точкой входа всех данных
     public void onChange(AccelerometrData data) {
         long xy = data.getXy();
         long xz = data.getXz();
@@ -86,14 +85,16 @@ public class MainPresenter extends BasePresenter implements AcceleromertContract
 
         ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
+//-------------------------------------------------------------------
+    //?????????????????????????????????????????
 
     @Override
-    public void onChange(HardwareData data) {
+    public void onChange(HardwareDataContract data) {
         Log.i(TAG, "HardwareData");
     }
 
     @Override
-    public void Change(HardwareData data) {
+    public void Change(HardwareDataContract data) {
         Log.i(TAG, "HardwareData");
     }
 

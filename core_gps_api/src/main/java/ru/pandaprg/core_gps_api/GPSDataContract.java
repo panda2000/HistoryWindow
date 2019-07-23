@@ -1,4 +1,6 @@
 package ru.pandaprg.core_gps_api;
 
-public abstract class GPSDataContract {//extends HardwareDataContract {
+import ru.pandaprg.core_hardware_api.HardwareDataContract;
+
+public interface GPSDataContract extends HardwareDataContract {
 }

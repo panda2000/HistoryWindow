@@ -37,5 +37,7 @@ dependencies {
     implementation project(path: ':navigator')
     implementation project(path: ':baselibrary')
     implementation project(path: ':gallerylib')
+    implementation project(path: ':core_gps_impl')
+    implementation project(path: ':core_accelerometr_impl')
 
 }

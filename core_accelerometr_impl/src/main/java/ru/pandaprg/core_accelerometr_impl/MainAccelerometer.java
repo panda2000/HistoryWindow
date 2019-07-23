@@ -7,6 +7,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import ru.pandaprg.core_accelerometr_api.AcceleromertContract;
+import ru.pandaprg.core_hardware_api.HardwareContract;
+import ru.pandaprg.core_hardware_api.HardwareDataContract;
 
 
 public class MainAccelerometer implements SensorEventListener, AcceleromertContract {
@@ -22,9 +24,9 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
     private float[] OrientationData; //Матрица положения в пространстве
 
     //private MainPresenter presenter;
-    private AcceleromertContract contract;
+    private HardwareContract contract;
 
-    public MainAccelerometer(Context ctx, AcceleromertContract contract) {
+    public MainAccelerometer(Context ctx, HardwareContract contract) {
         this.ctx = ctx;
         this.contract = (AcceleromertContract) contract;   // привязываем объект реализующий контракт
         sensorManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
@@ -33,6 +35,7 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
         accelData = new float[3];
         magnetData = new float[3];
         OrientationData = new float[3];
+        onResume();
     }
 
 
@@ -75,7 +78,7 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
 
         //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
 
-        contract.onChange(data);
+        contract.onChange((HardwareDataContract) data);
     }
 
     @Override
@@ -83,4 +86,13 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
 
     }
 
+    @Override
+    public void onChange(HardwareDataContract data) {
+
+    }
+
+    @Override
+    public void Change(HardwareDataContract data) {
+
+    }
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import ru.pandaprg.core_gps_api.GPSDataContract;
 
-public class GPSData extends GPSDataContract {
+public class GPSData implements GPSDataContract {
     private double lat;
     private double lng;
     private Date time;

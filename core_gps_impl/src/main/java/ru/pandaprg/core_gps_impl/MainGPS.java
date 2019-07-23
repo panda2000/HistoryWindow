@@ -15,8 +15,10 @@ import android.view.View;
 import java.util.Date;
 
 import ru.pandaprg.core_gps_api.GPSContract;
+import ru.pandaprg.core_hardware_api.HardwareContract;
+import ru.pandaprg.core_hardware_api.HardwareDataContract;
 
-public class MainGPS { // implements GPSContract {
+public class MainGPS  implements GPSContract {
 
     private final String TAG = "MainGPS";
 
@@ -24,13 +26,15 @@ public class MainGPS { // implements GPSContract {
     private Context ctx;
 
     //private MainPresenter presenter;
-    private GPSContract contract;
+    private HardwareContract contract;
 
-    public MainGPS(Context ctx, GPSContract contract) {
+    public MainGPS(Context ctx, HardwareContract contract) {
         this.ctx = ctx;
         this.contract = contract;
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
+        onResume();
     }
+
 
     public void onCreate(Context ctx) {
 
@@ -133,5 +137,15 @@ public class MainGPS { // implements GPSContract {
         ctx.startActivity(new Intent(
                 android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     };
+
+    @Override
+    public void onChange(HardwareDataContract data) {
+
+    }
+
+    @Override
+    public void Change(HardwareDataContract data) {
+
+    }
 
 }
