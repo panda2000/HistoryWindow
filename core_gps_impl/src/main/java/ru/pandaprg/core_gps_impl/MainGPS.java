@@ -15,8 +15,8 @@ import android.view.View;
 import java.util.Date;
 
 import ru.pandaprg.core_gps_api.GPSContract;
-import ru.pandaprg.core_hardware_api.HardwareContract;
 import ru.pandaprg.core_hardware_api.HardwareDataContract;
+import ru.pandaprg.core_hardware_api.HardwareReciveDataCallback;
 
 public class MainGPS  implements GPSContract {
 
@@ -25,12 +25,11 @@ public class MainGPS  implements GPSContract {
     private LocationManager locationManager;
     private Context ctx;
 
-    //private MainPresenter presenter;
-    private HardwareContract contract;
+    HardwareReciveDataCallback callback;
 
-    public MainGPS(Context ctx, HardwareContract contract) {
+
+    public MainGPS(Context ctx) {
         this.ctx = ctx;
-        this.contract = contract;
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
         onResume();
     }
@@ -111,7 +110,7 @@ public class MainGPS  implements GPSContract {
 
         GPSData data = new GPSData(location.getLatitude(), location.getLongitude(),new Date(location.getTime()));
 
-        contract.onChange(data); //onChange(data);
+        callback.onRecive(data);
     }
 
     private String formatLocation(Location location) {
@@ -138,9 +137,10 @@ public class MainGPS  implements GPSContract {
                 android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     };
 
-    @Override
-    public void onChange(HardwareDataContract data) {
 
+    @Override
+    public void registerCallBack(HardwareReciveDataCallback callback) {
+        this.callback = callback;
     }
 
     @Override

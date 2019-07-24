@@ -7,8 +7,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import ru.pandaprg.core_accelerometr_api.AcceleromertContract;
-import ru.pandaprg.core_hardware_api.HardwareContract;
 import ru.pandaprg.core_hardware_api.HardwareDataContract;
+import ru.pandaprg.core_hardware_api.HardwareReciveDataCallback;
 
 
 public class MainAccelerometer implements SensorEventListener, AcceleromertContract {
@@ -17,18 +17,17 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
 
     private Context ctx;
     private SensorManager sensorManager;
+    private HardwareReciveDataCallback callback;
 
     private float[] rotationMatrix;     //Матрица поворота
     private float[] accelData;           //Данные с акселерометра
     private float[] magnetData;       //Данные геомагнитного датчика
     private float[] OrientationData; //Матрица положения в пространстве
 
-    //private MainPresenter presenter;
-    private HardwareContract contract;
 
-    public MainAccelerometer(Context ctx, HardwareContract contract) {
+
+    public MainAccelerometer(Context ctx) {
         this.ctx = ctx;
-        this.contract = (AcceleromertContract) contract;   // привязываем объект реализующий контракт
         sensorManager = (SensorManager) ctx.getSystemService(Context.SENSOR_SERVICE);
 
         rotationMatrix = new float[16];
@@ -78,7 +77,8 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
 
         //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
 
-        contract.onChange((HardwareDataContract) data);
+        //contract.onChange((HardwareDataContract) data);
+        callback.onRecive(data);
     }
 
     @Override
@@ -86,9 +86,10 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
 
     }
 
-    @Override
-    public void onChange(HardwareDataContract data) {
 
+    @Override
+    public void registerCallBack(HardwareReciveDataCallback callback) {
+        this.callback = callback;
     }
 
     @Override

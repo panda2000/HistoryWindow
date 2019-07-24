@@ -48,6 +48,7 @@ public class Model {
         myLocationTime = time;
 
         parameters = new RequestParameters(lat,lng);
+        presenter.showGPSData(lat, lng, time);
     }
 
     public void setMyAccelerometr (long xy, long xz, long yz){
@@ -56,6 +57,7 @@ public class Model {
         currentDeg = (float) (xy * (-1) + imageAzimut);
 
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
+            presenter.showAccelerometrData(xy, xz, yz);
             presenter.showArrow();
             presenter.onRotation(oldDeg, currentDeg);
         }

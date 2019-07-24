@@ -6,16 +6,15 @@ import android.util.Log;
 import java.util.Date;
 
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
-import ru.pandaprg.core_accelerometr_impl.AccelerometrData;
 import ru.pandaprg.core_accelerometr_impl.MainAccelerometer;
-import ru.pandaprg.core_gps_impl.GPSData;
 import ru.pandaprg.core_gps_impl.MainGPS;
 import ru.pandaprg.core_hardware_api.HardwareContract;
-import ru.pandaprg.core_hardware_api.HardwareDataContract;
+import ru.pandaprg.historywindow.Hardware.AccelerometrReciver;
+import ru.pandaprg.historywindow.Hardware.GPSReciver;
 import ru.pandaprg.historywindow.Model.Model;
 import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 
-public class MainPresenter extends BasePresenter implements HardwareContract {
+public class MainPresenter extends BasePresenter {
 
     private final String TAG = "MainPresenter";
 
@@ -25,7 +24,10 @@ public class MainPresenter extends BasePresenter implements HardwareContract {
     private Context ctx;
 
     private HardwareContract gps;
+    private GPSReciver gpsReciver;
+
     private HardwareContract accel;
+    private AccelerometrReciver accelerometrReciver;
 
 
     private MainHistoryPin historyPin;
@@ -36,9 +38,13 @@ public class MainPresenter extends BasePresenter implements HardwareContract {
         model = Model.getInstanse(this);
 
         // --------------- Для GPS --------------------------------
-        gps = new MainGPS(ctx, this);
+        gps = new MainGPS(ctx);
+        gpsReciver =new GPSReciver(model);
+        gps.registerCallBack(gpsReciver);
 
-        accel = new MainAccelerometer(ctx, this);
+        accel = new MainAccelerometer(ctx);
+        accelerometrReciver = new AccelerometrReciver(model);
+        accel.registerCallBack(accelerometrReciver);
 
          //------------------- Для WEB HistoryPin-------------------
         // myLat = 46.3757;
@@ -50,15 +56,10 @@ public class MainPresenter extends BasePresenter implements HardwareContract {
     //----------------------- GPS -----------------------------
 
     //@Override
-    //TODO исправить баг с одной точкой входа всех данных
-    public void onChange(GPSData data) {
+    //TODO move from presenter. Create Class
+    public void showGPSData(double lat, double lng, Date time) {
 
-        double lat = data.getLat();
-        double lng = data.getLng();
-        Date time = data.getTime();
-
-        ((Model)model).setMyLocation(lat, lng, time);
-
+        //TODO move from metod()
         //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
         historyPin = new MainHistoryPin(this, ((Model)model).getParameters());
 
@@ -72,32 +73,10 @@ public class MainPresenter extends BasePresenter implements HardwareContract {
     }
 
 //----------------------- Accelerometr -----------------------------
-    //@Override
-//TODO исправить баг с одной точкой входа всех данных
-    public void onChange(AccelerometrData data) {
-        long xy = data.getXy();
-        long xz = data.getXz();
-        long yz = data.getYz();
-
-        //Log.i(TAG, data.getXy()+ "  "+data.getXz()+"  "+data.getYz());
-    //TODO  ru.pandaprg.baselibrary.Model.BaseModel cannot be cast to ru.pandaprg.historywindow.Model.Model
-        ((Model)model).setMyAccelerometr(xy, xz, yz);
+    public void showAccelerometrData(long xy, long xz, long yz) {
 
         ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
-//-------------------------------------------------------------------
-    //?????????????????????????????????????????
-
-    @Override
-    public void onChange(HardwareDataContract data) {
-        Log.i(TAG, "HardwareData");
-    }
-
-    @Override
-    public void Change(HardwareDataContract data) {
-        Log.i(TAG, "HardwareData");
-    }
-
 
 //--------------------------------------------------------------------
     // TODO : move to Navigator Lib

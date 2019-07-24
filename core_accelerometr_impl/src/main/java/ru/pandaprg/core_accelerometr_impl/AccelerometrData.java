@@ -1,7 +1,9 @@
 package ru.pandaprg.core_accelerometr_impl;
 
 
-public class AccelerometrData {
+import ru.pandaprg.core_accelerometr_api.AccelerometrDataContract;
+
+public class AccelerometrData implements AccelerometrDataContract {
     private long xy;
     private long xz;
     private long yz;
