@@ -10,11 +10,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import ru.pandaprg.baselibrary.View.BaseActivity;
-import ru.pandaprg.gallerylib.PictureFragment;
-import ru.pandaprg.core_camera_impl.MyCamera;
+import ru.pandaprg.core_base_hardware_impl.Permissions;
 import ru.pandaprg.core_camera_api.MyCameraContract;
+import ru.pandaprg.core_camera_impl.MyCamera;
+import ru.pandaprg.gallerylib.PictureFragment;
+import ru.pandaprg.historywindow.Main.arrow.ArrowFragment;
 import ru.pandaprg.historywindow.R;
-import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 
 public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChangeListener {
 
@@ -67,13 +68,13 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
 
 
-        // ------------ Presenter -----------------------------
-        // Check Permissions for GPS and Accelerometer
-    //    navigatorPermissions =  new Permissions();
-    //    navigatorPermissions.CheckPermissions(this, MainActivity.this);
-
         presenter = new MainPresenter(this);
         presenter.attach(this);
+
+
+        //---------------- Permission ----------------------------
+        Permissions permissions = new Permissions();
+        permissions.CheckPermissions(this,this);
 
         //-------------- GPS -------------------------------------
         textView = (TextView) findViewById(R.id.textGPS);
@@ -121,7 +122,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         if (savedInstanceState == null) {
             arrow = ArrowFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
-                    .replace(ru.pandaprg.navigator.R.id.container, arrow)
+                    .replace(R.id.container, arrow)
                     .commitNow();
         }
     }
@@ -133,7 +134,7 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     public void showPicture (){
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(ru.pandaprg.navigator.R.id.container, PictureFragment.newInstance())
+                    .replace(R.id.container, PictureFragment.newInstance())
                     .commitNow();
         }
     }

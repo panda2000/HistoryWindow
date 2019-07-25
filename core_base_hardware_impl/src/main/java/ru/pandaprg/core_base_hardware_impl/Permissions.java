@@ -36,7 +36,11 @@ public class Permissions implements PermissionsContract, ActivityCompat.OnReques
         this.activity = activity;
         this.ctx = ctx;
 
-        checkAndAddPermission();
+        if (activity == null) {
+            Log.d(TAG, "CheckPermissions: activity is null");
+        } else {
+            checkAndAddPermission();
+        }
     }
 
     private void checkAndAddPermission() {
@@ -71,6 +75,10 @@ public class Permissions implements PermissionsContract, ActivityCompat.OnReques
         if (ContextCompat.checkSelfPermission(ctx, permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
             // Check for Rationale Option
+            if (activity == null)
+                Log.d(TAG, "addPermission: activity is null");
+            if (permission == null)
+                Log.d(TAG, "addPermission: permission is null");
             if (!activity.shouldShowRequestPermissionRationale(permission))
                 return false;
         }

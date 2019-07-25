@@ -34,11 +34,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation project(path: ':navigator')
     implementation project(path: ':baselibrary')
     implementation project(path: ':gallerylib')
     implementation project(path: ':core_gps_impl')
     implementation project(path: ':core_accelerometr_impl')
     implementation project(path: ':core_camera_impl')
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation project(path: ':navigator')
+    implementation project(path: ':core_base_hardware_impl')
 
 }

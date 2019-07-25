@@ -1,4 +1,4 @@
-package ru.pandaprg.navigator.compass.ui.arrow;
+package ru.pandaprg.historywindow.Main.arrow;
 
 import android.arch.lifecycle.ViewModel;
 

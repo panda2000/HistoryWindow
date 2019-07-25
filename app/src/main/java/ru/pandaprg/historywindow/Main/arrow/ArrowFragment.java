@@ -1,4 +1,5 @@
-package ru.pandaprg.navigator.compass.ui.arrow;
+package ru.pandaprg.historywindow.Main.arrow;
+
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -12,7 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-import ru.pandaprg.navigator.R;
+import ru.pandaprg.historywindow.R;
+
 
 public class ArrowFragment extends Fragment {
 
