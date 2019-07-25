@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.gallerylib.PictureFragment;
-import ru.pandaprg.historywindow.Hardware.Camera.MyCamera;
-import ru.pandaprg.historywindow.Hardware.Camera.MyCameraContract;
+import ru.pandaprg.core_camera_impl.MyCamera;
+import ru.pandaprg.core_camera_api.MyCameraContract;
 import ru.pandaprg.historywindow.R;
 import ru.pandaprg.navigator.compass.ui.arrow.ArrowFragment;
 

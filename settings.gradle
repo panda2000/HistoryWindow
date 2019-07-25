@@ -1,1 +1,1 @@
-include ':app', ':navigator', ':baselibrary', ':gallerylib', ':core_base_hardware_api', ':core_accelerometr_api', ':core_accelerometr_impl', ':core_base_hardware_impl', ':core_gps_api', ':core_gps_impl'
+include ':app', ':navigator', ':baselibrary', ':gallerylib', ':core_base_hardware_api', ':core_accelerometr_api', ':core_accelerometr_impl', ':core_base_hardware_impl', ':core_gps_api', ':core_gps_impl', ':core_camera_api', ':core_camera_impl'

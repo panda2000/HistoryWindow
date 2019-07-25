@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Hardware.Camera;
+package ru.pandaprg.core_camera_impl;
 
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;

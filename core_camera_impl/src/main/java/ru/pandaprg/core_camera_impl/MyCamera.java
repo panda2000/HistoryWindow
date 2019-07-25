@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Hardware.Camera;
+package ru.pandaprg.core_camera_impl;
 
 import android.Manifest;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.TextureView;
+
+import ru.pandaprg.core_camera_api.MyCameraContract;
 
 public class MyCamera implements MyCameraContract {
 

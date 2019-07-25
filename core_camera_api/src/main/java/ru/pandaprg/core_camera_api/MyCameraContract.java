@@ -1,4 +1,4 @@
-package ru.pandaprg.historywindow.Hardware.Camera;
+package ru.pandaprg.core_camera_api;
 
 import android.view.TextureView;
 
