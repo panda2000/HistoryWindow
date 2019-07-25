@@ -30,15 +30,17 @@ public class MainGPS  implements GPSContract {
 
     public MainGPS(Context ctx) {
         this.ctx = ctx;
+        onCreate();
+    }
+
+    @Override
+    public void onCreate() {
         locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
         onResume();
-    }
-
-
-    public void onCreate(Context ctx) {
 
     }
 
+    @Override
     public void onResume() {
         if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -64,6 +66,7 @@ public class MainGPS  implements GPSContract {
                 locationListener);
     }
 
+    @Override
     public void onPause() {
         locationManager.removeUpdates(locationListener);
     }

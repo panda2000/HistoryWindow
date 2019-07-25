@@ -4,4 +4,7 @@ public interface HardwareContract {
     // TODO renabe to *able
     void registerCallBack (HardwareReciveDataCallback callback);
     void Change(HardwareDataContract data);
+    void onCreate();
+    void onResume();
+    void onPause();
 }

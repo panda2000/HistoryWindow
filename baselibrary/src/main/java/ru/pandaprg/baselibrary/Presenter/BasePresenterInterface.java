@@ -9,4 +9,7 @@ public interface BasePresenterInterface {
     void attach (BaseActivity view);
 
     void detach ();
+
+    void onPause ();
+    void onResume ();
 }

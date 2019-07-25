@@ -107,6 +107,17 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    protected void onResume () {
+        super.onResume();
+        presenter.onResume();
+    }
 
     public void showGPSLocation (String mess){
         textView.setText(mess);

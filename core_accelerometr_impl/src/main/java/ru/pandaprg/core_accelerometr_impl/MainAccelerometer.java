@@ -38,18 +38,18 @@ public class MainAccelerometer implements SensorEventListener, AcceleromertContr
     }
 
 
-    //@Override
-    public void onCreate(Context ctx) {
+    @Override
+    public void onCreate() {
 
     }
 
-    //@Override
+    @Override
     public void onResume() {
         sensorManager.registerListener( (SensorEventListener)this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_UI );
         sensorManager.registerListener( (SensorEventListener)this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_UI );
     }
 
-    //@Override
+    @Override
     public void onPause() {
         sensorManager.unregisterListener((SensorEventListener) this);
     }

@@ -7,7 +7,6 @@ import java.util.Date;
 
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
 import ru.pandaprg.core_accelerometr_impl.MainAccelerometer;
-import ru.pandaprg.core_base_hardware_impl.Permissions;
 import ru.pandaprg.core_gps_impl.MainGPS;
 import ru.pandaprg.core_hardware_api.HardwareContract;
 import ru.pandaprg.historywindow.Hardware.AccelerometrReciver;
@@ -173,4 +172,15 @@ public class MainPresenter extends BasePresenter {
     }
 
 
+    @Override
+    public void onPause() {
+        gps.onPause();
+        accel.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        gps.onResume();
+        accel.onResume();
+    }
 }
