@@ -41,5 +41,7 @@ dependencies {
     implementation project(path: ':core_camera_impl')
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation project(path: ':core_base_hardware_impl')
+    implementation project(path: ':feature_compass_impl')
+    implementation project(path: ':feature_compass_api')
 
 }
