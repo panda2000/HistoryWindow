@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/core_camera_impl" />
             <option value="$PROJECT_DIR$/core_gps_api" />
             <option value="$PROJECT_DIR$/core_gps_impl" />
+            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/feature_camera_api" />
             <option value="$PROJECT_DIR$/feature_camera_impl" />
             <option value="$PROJECT_DIR$/feature_compass_api" />

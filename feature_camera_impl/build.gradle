@@ -34,4 +34,5 @@ dependencies {
     implementation project(path: ':feature_camera_api')
     implementation project(path: ':core_camera_impl')
     implementation project(path: ':core_camera_api')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
