@@ -98,10 +98,10 @@
                 android:text="@string/open_camera2" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnCompass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Карта" />
+                android:text="Компас" />
 
         </LinearLayout>
 

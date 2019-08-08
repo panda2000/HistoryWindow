@@ -1,5 +1,6 @@
 package ru.pandaprg.historywindow.Main;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -13,6 +14,7 @@ import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.core_base_hardware_impl.Permissions;
 import ru.pandaprg.core_camera_api.MyCameraContract;
 import ru.pandaprg.core_camera_impl.MyCamera;
+import ru.pandaprg.feature_compass2_impl.CompassActivity;
 import ru.pandaprg.gallerylib.PictureFragment;
 import ru.pandaprg.historywindow.Main.arrow.ArrowFragment;
 import ru.pandaprg.historywindow.R;
@@ -39,6 +41,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
     private Button mButtonChangeCamera = null;
     private Button mButtonOpenCamera2 = null;
+
+    private Button mButtonCompass = null;
     //-------------------------------------------
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -53,7 +57,8 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         // ----Добавляем во фрагмент Стрелку из модуля навигатор--------
 
         // TODO check this code and Architect !!!!!
-        showArrow ();
+        //showArrow ();
+        mButtonCompass = (Button) findViewById(R.id.btnCompass);
 
         //--------------------------------------------------------------
 
@@ -104,6 +109,14 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
 
         //------------ Picasso ------------------------------------------------
         //Move to GalleryLib module
+
+        mButtonCompass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
