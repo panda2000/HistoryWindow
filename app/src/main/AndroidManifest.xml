@@ -28,6 +28,9 @@
         <activity android:name="ru.pandaprg.feature_compass2_impl.CompassActivity"
             android:label="Compass">
         </activity>
+        <activity android:name="ru.pandaprg.feature_camera_impl.CameraActivity"
+            android:label="Camera">
+        </activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main.MainActivity">
+    tools:context=".CameraActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +32,6 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#2196F3"
             tools:context=".Arrow" />
 
 
@@ -91,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_camera1" />
+
 
             <Button
                 android:id="@+id/btnCompass"

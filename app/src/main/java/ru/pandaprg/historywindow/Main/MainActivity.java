@@ -14,6 +14,7 @@ import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.core_base_hardware_impl.Permissions;
 import ru.pandaprg.core_camera_api.MyCameraContract;
 import ru.pandaprg.core_camera_impl.MyCamera;
+import ru.pandaprg.feature_camera_impl.CameraActivity;
 import ru.pandaprg.feature_compass2_impl.CompassActivity;
 import ru.pandaprg.gallerylib.PictureFragment;
 import ru.pandaprg.historywindow.Main.arrow.ArrowFragment;
@@ -40,7 +41,6 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
     private TextView tvMess = null;
 
     private Button mButtonChangeCamera = null;
-    private Button mButtonOpenCamera2 = null;
 
     private Button mButtonCompass = null;
     //-------------------------------------------
@@ -63,7 +63,6 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         //--------------------------------------------------------------
 
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
-        mButtonOpenCamera2 = (Button) findViewById(R.id.btn_open_camera2);
 
         videoView = (TextureView) findViewById(R.id.video_view);
 
@@ -95,14 +94,9 @@ public class MainActivity extends BaseActivity implements SeekBar.OnSeekBarChang
         mButtonChangeCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cam.choiceCamera(0);
-            }
-        });
-
-        mButtonOpenCamera2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cam.choiceCamera(1);
+                //cam.choiceCamera(0);
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
 
