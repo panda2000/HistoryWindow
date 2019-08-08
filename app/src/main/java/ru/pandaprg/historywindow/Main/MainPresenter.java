@@ -67,7 +67,7 @@ public class MainPresenter extends BasePresenter {
 
         if (isAttached()) {
             String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
-            ((MainActivity)view).showGPSLocation(mess);
+ //           ((MainActivity)view).showGPSLocation(mess);
             Log.i (TAG,mess);
         } else {
             Log.e (TAG,"view is null");
@@ -77,7 +77,7 @@ public class MainPresenter extends BasePresenter {
 //----------------------- Accelerometr -----------------------------
     public void showAccelerometrData(long xy, long xz, long yz) {
 
-        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
+//        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
     }
 
 //--------------------------------------------------------------------
@@ -85,12 +85,13 @@ public class MainPresenter extends BasePresenter {
 
     public void onRotation (float oldDeg, float currentDeg){
         Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
-        ((MainActivity)view).rotationArrow(oldDeg, currentDeg);
+//        ((MainActivity)view).rotationArrow(oldDeg, currentDeg);
 
     }
 
     public void showArrow (){
-        ((MainActivity)view).showArrow();
+
+        //((MainActivity)view).showArrow();
     }
 
 //--------------------------------------------------------------------
@@ -162,13 +163,16 @@ public class MainPresenter extends BasePresenter {
         return imagesData;
     }
 */
-    public void showMessage (String mess) {((MainActivity)view).showMessage(mess);}
+    public void showMessage (String mess) {
+        //((MainActivity)view).showMessage(mess);
+        //
+    }
 
 
 
     public void onHistoryPinPictureNotFind(){
-        ((MainActivity)view).showMessage("Picture not found");
-        ((MainActivity)view).hidePicture();
+      //  ((MainActivity)view).showMessage("Picture not found");
+      //  ((MainActivity)view).hidePicture();
     }
 
 

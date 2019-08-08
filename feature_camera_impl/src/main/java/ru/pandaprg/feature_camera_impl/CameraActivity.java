@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import ru.pandaprg.baselibrary.View.BaseActivity;
@@ -11,7 +12,9 @@ import ru.pandaprg.core_camera_api.MyCameraContract;
 import ru.pandaprg.core_camera_impl.MyCamera;
 import ru.pandaprg.feature_camera_api.CameraContract;
 
-public class CameraActivity extends BaseActivity implements CameraContract {
+public class CameraActivity extends BaseActivity implements CameraContract, SeekBar.OnSeekBarChangeListener {
+
+    private SeekBar alphaBar;
 
     // Поля Камеры
     private MyCameraContract cam;
@@ -35,6 +38,10 @@ public class CameraActivity extends BaseActivity implements CameraContract {
 
         videoView = (TextureView) findViewById(R.id.video_view);
 
+        alphaBar = (SeekBar) findViewById(R.id.alphaBar);
+        alphaBar.setProgress(128);
+        alphaBar.setOnSeekBarChangeListener(this);
+
 //        presenter = new CameraPresenter(this);
 //        presenter.attach(this);
 
@@ -55,4 +62,36 @@ public class CameraActivity extends BaseActivity implements CameraContract {
         });
     }
 
+    public void showMessage (String mess) {tvMess.setText(mess);}
+/*
+    public void showPicture (){
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, PictureFragment.newInstance())
+                    .commitNow();
+        }
+    }
+
+    public void hidePicture (){
+        getSupportFragmentManager().beginTransaction()
+                .remove(PictureFragment.newInstance())
+                .commitNow();
+    }
+*/
+    //--------------------- SeekBar interface --------------------------------
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        // presenter.onChangeAlphaBar(progress);
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
 }
