@@ -48,7 +48,8 @@ public class Model {
         myLocationTime = time;
 
         parameters = new RequestParameters(lat,lng);
-        presenter.showGPSData(lat, lng, time);
+        // TODO move to COMPASS_impl
+        //  presenter.showGPSData(lat, lng, time);
     }
 
     public void setMyAccelerometr (long xy, long xz, long yz){
@@ -57,9 +58,10 @@ public class Model {
         currentDeg = (float) (xy * (-1) + imageAzimut);
 
         if (Math.abs(oldDeg - currentDeg) > 1 && distance > 10) {
-            presenter.showAccelerometrData(xy, xz, yz);
-            presenter.showArrow();
-            presenter.onRotation(oldDeg, currentDeg);
+            // TODO move to COMPASS_impl
+            // presenter.showAccelerometrData(xy, xz, yz);
+            // presenter.showArrow();
+            //presenter.onRotation(oldDeg, currentDeg);
         }
     }
 
@@ -92,8 +94,10 @@ public class Model {
                    // presenter.showImage(imageURL);
                    // presenter.onRotation(currentDeg, 0);
                 }
+
                 presenter.showMessage("Дистанция "+ distance + "м.");
-                presenter.showArrow();
+                // TODO move to COMPASS_impl
+                // presenter.showArrow();
             } else {
                 presenter.showMessage("Изображение не обнаружено");
             }

@@ -1,9 +1,6 @@
 package ru.pandaprg.historywindow.Main;
 
 import android.content.Context;
-import android.util.Log;
-
-import java.util.Date;
 
 import ru.pandaprg.baselibrary.Presenter.BasePresenter;
 import ru.pandaprg.core_accelerometr_impl.MainAccelerometer;
@@ -55,44 +52,6 @@ public class MainPresenter extends BasePresenter {
 
     }
 
-    //----------------------- GPS -----------------------------
-
-    //@Override
-    //TODO move from presenter. Create Class
-    public void showGPSData(double lat, double lng, Date time) {
-
-        //TODO move from metod()
-        //historyPin = new MainHistoryPin(this, 46.3757, 48.0485);
-        historyPin = new MainHistoryPin(this, ((Model)model).getParameters());
-
-        if (isAttached()) {
-            String mess = String.format("Coordinates: lat = %1$.4f, lon = %2$.4f, time = %3$tF %3$tT", lat, lng, time);
- //           ((MainActivity)view).showGPSLocation(mess);
-            Log.i (TAG,mess);
-        } else {
-            Log.e (TAG,"view is null");
-        }
-    }
-
-//----------------------- Accelerometr -----------------------------
-    public void showAccelerometrData(long xy, long xz, long yz) {
-
-//        ((MainActivity)view).showAccelerometerData(String.valueOf(xy), String.valueOf(xz), String.valueOf(yz) );
-    }
-
-//--------------------------------------------------------------------
-    // TODO : move to Navigator Lib
-
-    public void onRotation (float oldDeg, float currentDeg){
-        Log.i(TAG, "Rotation from " + oldDeg + " to " + currentDeg);
-//        ((MainActivity)view).rotationArrow(oldDeg, currentDeg);
-
-    }
-
-    public void showArrow (){
-
-        //((MainActivity)view).showArrow();
-    }
 
 //--------------------------------------------------------------------
 /*
@@ -104,10 +63,16 @@ public class MainPresenter extends BasePresenter {
     public void onHistoryPinPictureFind(POJOUserGallery gallery){
         List <ImagesData> imagesData = convertHystoryPin2Model(gallery);
         ((Model)model).findPictures(imagesData);
-
-
     }
 
+    public void onHistoryPinPictureNotFind(){
+      //  ((MainActivity)view).showMessage("Picture not found");
+      //  ((MainActivity)view).hidePicture();
+    }
+
+*/
+//--------------------------------------------------------------------
+/*
     public  void onPictureFind (String imageURL){
         showImage(imageURL);
     }
@@ -166,13 +131,6 @@ public class MainPresenter extends BasePresenter {
     public void showMessage (String mess) {
         //((MainActivity)view).showMessage(mess);
         //
-    }
-
-
-
-    public void onHistoryPinPictureNotFind(){
-      //  ((MainActivity)view).showMessage("Picture not found");
-      //  ((MainActivity)view).hidePicture();
     }
 
 
