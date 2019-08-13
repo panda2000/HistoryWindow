@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import ru.pandaprg.baselibrary.Coordinator.BaseCoordinator;
 import ru.pandaprg.feature_camera_impl.CameraActivity;
 import ru.pandaprg.feature_compass2_impl.CompassActivity;
 import ru.pandaprg.historywindow.R;
@@ -13,7 +14,12 @@ public class MainCoordinator extends BaseCoordinator {
 
     private static final String TAG = "MainCoordinator";
 
-    public void showActivity (Context ctx, int id){
+
+    public MainCoordinator(Context ctx) {
+        super(ctx);
+    }
+
+    public void showActivity (int id){
         Intent intent = null;
         switch (id) {
             case R.id.btn_open_camera1 :

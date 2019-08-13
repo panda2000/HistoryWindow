@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
 
     private Bundle savedInstanceState;
 
-    private MainCoordinator coordinator = new MainCoordinator();
+    private MainCoordinator coordinator = new MainCoordinator(this);
 
 
     private Button mButtonChangeCamera = null;
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                coordinator.showActivity(MainActivity.this, v.getId());
+                coordinator.showActivity( v.getId());
             }
         };
 

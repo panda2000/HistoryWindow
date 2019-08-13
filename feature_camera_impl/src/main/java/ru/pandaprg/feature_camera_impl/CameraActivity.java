@@ -21,7 +21,11 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
     private TextureView videoView = null;
     private TextView tvMess = null;
 
+    private CameraCoordinator coordinator = new CameraCoordinator(this);
+
+
     private Button mButtonChangeCamera = null;
+
 
     private Button mButtonCompass = null;
     //-------------------------------------------
@@ -35,6 +39,18 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
         //--------------------------------------------------------------
 
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
+        mButtonCompass = (Button) findViewById(R.id.btnCompass);
+
+        View.OnClickListener ocl = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                coordinator.showActivity( v.getId());
+            }
+        };
+
+        mButtonCompass.setOnClickListener(ocl);
+        mButtonChangeCamera.setOnClickListener(ocl);
 
         videoView = (TextureView) findViewById(R.id.video_view);
 
