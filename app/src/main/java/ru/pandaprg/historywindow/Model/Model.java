@@ -3,6 +3,7 @@ package ru.pandaprg.historywindow.Model;
 import java.util.Date;
 import java.util.List;
 
+import ru.pandaprg.core_web_historypin_impl.RequestParameters;
 import ru.pandaprg.historywindow.Main.MainPresenter;
 
 public class Model {

@@ -1,6 +1,6 @@
 package ru.pandaprg.historywindow.Model;
 
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.POJO.UserGallery.Location;
+import ru.pandaprg.core_web_historypin_impl.POJO.UserGallery.Location;
 
 public class ImagesData {
     private String imageURL;

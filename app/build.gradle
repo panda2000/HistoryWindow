@@ -45,5 +45,7 @@ dependencies {
     implementation project(path: ':feature_compass_api')
     implementation project(path: ':feature_camera_api')
     implementation project(path: ':feature_camera_impl')
+    implementation project(path: ':core_web_historypin_impl')
+    implementation project(path: ':core_web_historypin_api')
 
 }

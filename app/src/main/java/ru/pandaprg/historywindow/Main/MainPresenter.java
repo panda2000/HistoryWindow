@@ -6,10 +6,10 @@ import ru.pandaprg.baselibrary.Presenter.BasePresenter;
 import ru.pandaprg.core_accelerometr_impl.MainAccelerometer;
 import ru.pandaprg.core_gps_impl.MainGPS;
 import ru.pandaprg.core_hardware_api.HardwareContract;
+import ru.pandaprg.core_web_historypin_impl.MainHistoryPin;
 import ru.pandaprg.historywindow.Hardware.AccelerometrReciver;
 import ru.pandaprg.historywindow.Hardware.GPSReciver;
 import ru.pandaprg.historywindow.Model.Model;
-import ru.pandaprg.historywindow.Repository.WEB.HistoryPin.MainHistoryPin;
 
 public class MainPresenter extends BasePresenter {
 
@@ -53,12 +53,9 @@ public class MainPresenter extends BasePresenter {
     }
 
 
-//--------------------------------------------------------------------
+
+
 /*
-    public void onChangeAlphaBar (int alpha){
-        Log.i (TAG,"onChangeAlphaBar = " + alpha);
-        ((MainActivity)view).setPictureAplpha(alpha);
-    }
 
     public void onHistoryPinPictureFind(POJOUserGallery gallery){
         List <ImagesData> imagesData = convertHystoryPin2Model(gallery);
@@ -68,17 +65,6 @@ public class MainPresenter extends BasePresenter {
     public void onHistoryPinPictureNotFind(){
       //  ((MainActivity)view).showMessage("Picture not found");
       //  ((MainActivity)view).hidePicture();
-    }
-
-*/
-//--------------------------------------------------------------------
-/*
-    public  void onPictureFind (String imageURL){
-        showImage(imageURL);
-    }
-
-    public void showImage (String imageURL){
-        ((MainActivity)view).showPicture(imageURL);
     }
 
 
