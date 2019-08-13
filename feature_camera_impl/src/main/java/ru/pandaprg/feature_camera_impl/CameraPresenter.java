@@ -22,4 +22,12 @@ public class CameraPresenter {
     }
 */
 //--------------------------------------------------------------------
+
+/*
+    public void onHistoryPinPictureNotFind(){
+      //  ((MainActivity)view).showMessage("Picture not found");
+      //  ((MainActivity)view).hidePicture();
+    }
+
+*/
 }
