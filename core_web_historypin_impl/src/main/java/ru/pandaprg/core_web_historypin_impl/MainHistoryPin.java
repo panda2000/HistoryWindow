@@ -72,4 +72,11 @@ public class MainHistoryPin {
                              }
                     );
         }
+
+        /* TODO Create CallbackRegister
+    @Override
+    public void registerCallBack( callback) {
+        this.callback = callback;
+    }
+    */
 }
