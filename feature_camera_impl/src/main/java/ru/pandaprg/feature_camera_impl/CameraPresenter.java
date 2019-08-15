@@ -1,6 +1,21 @@
 package ru.pandaprg.feature_camera_impl;
 
-public class CameraPresenter {
+import ru.pandaprg.domain.UseCases.FindPicturesOut;
+
+public class CameraPresenter implements FindPicturesOut {
+    @Override
+    public void onPicturesFound() {
+
+    }
+
+    @Override
+    public void onPicturesNotFound() {
+
+    }
+
+    public void FindPicturesInThisPlace () {
+        // Todo FindPicturesInThisPlace in FindPicturesIn interface
+    }
 
 //--------------------------------------------------------------------
 /*
