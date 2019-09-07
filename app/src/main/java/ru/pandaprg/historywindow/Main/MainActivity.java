@@ -20,9 +20,9 @@ public class MainActivity extends BaseActivity {
     private MainCoordinator coordinator = new MainCoordinator(this);
 
 
-    private Button mButtonChangeCamera = null;
+    private Button mButtonChangeCamera;
 
-    private Button mButtonCompass = null;
+    private Button mButtonCompass;
     //-------------------------------------------
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
