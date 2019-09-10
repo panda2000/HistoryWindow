@@ -21,7 +21,6 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
     private TextureView videoView = null;
     private TextView tvMess = null;
 
-    private CameraCoordinator coordinator = new CameraCoordinator(this);
 
 
     private Button mButtonChangeCamera = null;
@@ -45,7 +44,7 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
             @Override
             public void onClick(View v) {
 
-                coordinator.showActivity( v.getId());
+
             }
         };
 
