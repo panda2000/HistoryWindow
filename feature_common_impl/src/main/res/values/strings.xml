@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">feature_common_impl</string>
+    <string name="open_camera1">Камера</string>
 </resources>

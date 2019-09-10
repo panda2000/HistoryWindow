@@ -1,6 +1,7 @@
 package ru.pandaprg.feature_camera_impl;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +12,12 @@ import ru.pandaprg.baselibrary.View.BaseActivity;
 import ru.pandaprg.core_camera_api.MyCameraContract;
 import ru.pandaprg.core_camera_impl.MyCamera;
 import ru.pandaprg.feature_camera_api.CameraContract;
+import ru.pandaprg.feature_common_impl.header.Header;
+import ru.pandaprg.feature_common_impl.header.HeaderOutContract;
 
-public class CameraActivity extends BaseActivity implements CameraContract, SeekBar.OnSeekBarChangeListener {
+public class CameraActivity extends BaseActivity implements CameraContract, HeaderOutContract, SeekBar.OnSeekBarChangeListener {
+
+    private static final String TAG = "CameraActivity";
 
     private SeekBar alphaBar;
 
@@ -25,6 +30,7 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
 
     private Button mButtonChangeCamera = null;
 
+    Header header;
 
     private Button mButtonCompass = null;
     //-------------------------------------------
@@ -36,7 +42,7 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
         setContentView(R.layout.activity_camera);
 
         //--------------------------------------------------------------
-
+/*
         mButtonChangeCamera = (Button) findViewById(R.id.btn_open_camera1);
         mButtonCompass = (Button) findViewById(R.id.btnCompass);
 
@@ -50,6 +56,18 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
 
         mButtonCompass.setOnClickListener(ocl);
         mButtonChangeCamera.setOnClickListener(ocl);
+*/
+        View rootView = findViewById(R.id.camera_screen);
+        if (rootView == null) {
+            Log.d(TAG, "onCreate: Footer rootView is NULL" );
+        }
+
+        try {   // Создаем Header
+            header = new Header(this,rootView);
+        }catch (Exception e){
+            Log.d(TAG, "onCreate Header: "+ e.getMessage() );
+        }
+
 
         videoView = (TextureView) findViewById(R.id.video_view);
 
@@ -107,6 +125,21 @@ public class CameraActivity extends BaseActivity implements CameraContract, Seek
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onButton1Click() {
+
+    }
+
+    @Override
+    public void onButton2Click() {
+
+    }
+
+    @Override
+    public void onButton3Click() {
 
     }
 }
